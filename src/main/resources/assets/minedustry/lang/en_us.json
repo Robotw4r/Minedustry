@@ -2,5 +2,9 @@
   "item.minedustry.platinum_ingot": "Platinum Ingot",
   "item.minedustry.cobalt_ingot": "Cobalt Ingot",
   "item.minedustry.thorium_ingot": "Thorium Ingot",
+  "block.minedustry.platinum_block": "Platinum Block",
+  "block.minedustry.cobalt_block": "Cobalt Block",
+  "block.minedustry.thorium_block": "Thorium Block",
+  
   "itemGroup.minedustry": "Minedustry"
 }

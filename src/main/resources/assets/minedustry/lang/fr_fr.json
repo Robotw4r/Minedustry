@@ -2,5 +2,9 @@
   "item.minedustry.platinum_ingot": "Lingot de Platine",
   "item.minedustry.cobalt_ingot": "Lingot de Cobalt",
   "item.minedustry.thorium_ingot": "Lingot de Thorium",
+  "block.minedustry.platinum_block": "Bloc de platine",
+  "block.minedustry.cobalt_block": "Bloc de cobalt",
+  "block.minedustry.thorium_block": "Bloc de thorium",
+  
   "itemGroup.minedustry": "Minedustry"
 }
