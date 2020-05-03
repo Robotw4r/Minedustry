@@ -27,6 +27,4 @@ public class RegistryHandler {
     public static final RegistryObject<Item> THORIUM_INGOT = ITEMS.register("thorium_ingot", ItemBase::new);
 
     //List of mod blocks
-    public static final RegistryObject<Block> PLATINUM_BLOCK =
-
 }
