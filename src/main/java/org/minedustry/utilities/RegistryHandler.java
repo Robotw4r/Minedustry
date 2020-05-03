@@ -1,5 +1,7 @@
 package org.minedustry.utilities;
 
+import net.minecraft.inventory.container.ContainerType;
+import net.minecraft.tileentity.TileEntityType;
 import org.minedustry.MinedustryMain;
 import org.minedustry.References;
 import org.minedustry.blocks.BlockBase;
@@ -17,11 +19,15 @@ public class RegistryHandler {
     public static final DeferredRegister<Item> ITEMS = new DeferredRegister<>(ForgeRegistries.ITEMS, References.MODID);
     public static final DeferredRegister<Block> BLOCKS = new DeferredRegister<>(ForgeRegistries.BLOCKS, References.MODID);
     public static final DeferredRegister<Fluid> FLUIDS = new DeferredRegister<>(ForgeRegistries.FLUIDS, References.MODID);
+    private static final DeferredRegister<TileEntityType<?>> TILES = new DeferredRegister<>(ForgeRegistries.TILE_ENTITIES, References.MODID);
+    private static final DeferredRegister<ContainerType<?>> CONTAINERS = new DeferredRegister<>(ForgeRegistries.CONTAINERS, References.MODID);
 
     public static void init() {
         ITEMS.register(FMLJavaModLoadingContext.get().getModEventBus());
         BLOCKS.register(FMLJavaModLoadingContext.get().getModEventBus());
         FLUIDS.register(FMLJavaModLoadingContext.get().getModEventBus());
+        TILES.register(FMLJavaModLoadingContext.get().getModEventBus());
+        CONTAINERS.register(FMLJavaModLoadingContext.get().getModEventBus());
     }
 
     //List of mod items
@@ -36,4 +42,6 @@ public class RegistryHandler {
     public static final RegistryObject<Item> COBALT_BLOCK_ITEM = ITEMS.register("cobalt_block", () -> new BlockItem(COBALT_BLOCK.get(), new Item.Properties().group(MinedustryMain.TAB)));
     public static final RegistryObject<Block> THORIUM_BLOCK = BLOCKS.register("thorium_block", BlockBase::new);
     public static final RegistryObject<Item> THORIUM_BLOCK_ITEM = ITEMS.register("thorium_block", () -> new BlockItem(THORIUM_BLOCK.get(), new Item.Properties().group(MinedustryMain.TAB)));
+    public static final RegistryObject<Block> BIOFUEL_GENERATOR = BLOCKS.register("biofuel_generator", BlockBase::new);
+    public static final RegistryObject<Item> BIOFUEL_GENERATOR_ITEM = ITEMS.register("biofuel_generator", () -> new BlockItem(BIOFUEL_GENERATOR.get(), new Item.Properties().group(MinedustryMain.TAB)));
 }

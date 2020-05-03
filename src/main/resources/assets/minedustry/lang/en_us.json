@@ -5,6 +5,7 @@
   "block.minedustry.platinum_block": "Platinum Block",
   "block.minedustry.cobalt_block": "Cobalt Block",
   "block.minedustry.thorium_block": "Thorium Block",
+  "block.minedustry.biofuel_generator": "Biofuel Generator",
   
   "itemGroup.minedustry": "Minedustry"
 }

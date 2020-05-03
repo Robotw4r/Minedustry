@@ -2,9 +2,10 @@
   "item.minedustry.platinum_ingot": "Lingot de Platine",
   "item.minedustry.cobalt_ingot": "Lingot de Cobalt",
   "item.minedustry.thorium_ingot": "Lingot de Thorium",
-  "block.minedustry.platinum_block": "Bloc de platine",
-  "block.minedustry.cobalt_block": "Bloc de cobalt",
-  "block.minedustry.thorium_block": "Bloc de thorium",
+  "block.minedustry.platinum_block": "Bloc de Platine",
+  "block.minedustry.cobalt_block": "Bloc de Cobalt",
+  "block.minedustry.thorium_block": "Bloc de Thorium",
+  "block.minedustry.biofuel_generator": "Generateur à carburant biologique",
   
   "itemGroup.minedustry": "Minedustry"
 }
