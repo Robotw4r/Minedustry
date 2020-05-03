@@ -13,6 +13,7 @@ import org.apache.logging.log4j.Logger;
 
 @Mod(References.MODID)
 public class MinedustryMain {
+	
     private static final Logger LOGGER = LogManager.getLogger();
 
     public MinedustryMain() {
