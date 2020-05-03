@@ -4,8 +4,8 @@ import net.minecraft.nbt.CompoundNBT;
 import net.minecraftforge.common.util.INBTSerializable;
 import net.minecraftforge.energy.EnergyStorage;
 
-public class IEnergyStorage extends EnergyStorage implements INBTSerializable<CompoundNBT> {
-    public IEnergyStorage(int capacity, int maxTransfer) {
+public class CustomEnergyStorage extends EnergyStorage implements INBTSerializable<CompoundNBT> {
+    public CustomEnergyStorage(int capacity, int maxTransfer) {
         super(capacity, maxTransfer);
     }
 
