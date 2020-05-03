@@ -1,0 +1,6 @@
+{
+  "parent": "item/generated",
+  "texture": {
+    "layer0": "minedustry:item/platinum_ingot"
+  }
+}
