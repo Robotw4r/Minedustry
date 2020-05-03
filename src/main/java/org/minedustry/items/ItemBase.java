@@ -1,8 +1,7 @@
-package fr.robotwar.minedustry.items;
+package org.minedustry.items;
 
-import fr.robotwar.minedustry.MinedustryMain;
+import org.minedustry.MinedustryMain;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemGroup;
 
 public class ItemBase extends Item {
 

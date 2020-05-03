@@ -1,4 +1,4 @@
-package fr.robotwar.minedustry;
+package org.minedustry;
 
 public class References {
     public static final String MODID = "minedustry";

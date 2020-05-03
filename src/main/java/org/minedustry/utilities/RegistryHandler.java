@@ -1,7 +1,7 @@
-package fr.robotwar.minedustry.utilities;
+package org.minedustry.utilities;
 
-import fr.robotwar.minedustry.References;
-import fr.robotwar.minedustry.items.ItemBase;
+import org.minedustry.References;
+import org.minedustry.items.ItemBase;
 import net.minecraft.block.Block;
 import net.minecraft.fluid.Fluid;
 import net.minecraft.item.Item;
