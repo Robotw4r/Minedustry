@@ -4,6 +4,7 @@ import net.minecraft.inventory.container.ContainerType;
 import net.minecraft.tileentity.TileEntityType;
 import org.minedustry.MinedustryMain;
 import org.minedustry.References;
+import org.minedustry.blocks.BiofuelGenerator;
 import org.minedustry.blocks.BlockBase;
 import org.minedustry.items.ItemBase;
 import net.minecraft.block.Block;
@@ -42,6 +43,6 @@ public class RegistryHandler {
     public static final RegistryObject<Item> COBALT_BLOCK_ITEM = ITEMS.register("cobalt_block", () -> new BlockItem(COBALT_BLOCK.get(), new Item.Properties().group(MinedustryMain.TAB)));
     public static final RegistryObject<Block> THORIUM_BLOCK = BLOCKS.register("thorium_block", BlockBase::new);
     public static final RegistryObject<Item> THORIUM_BLOCK_ITEM = ITEMS.register("thorium_block", () -> new BlockItem(THORIUM_BLOCK.get(), new Item.Properties().group(MinedustryMain.TAB)));
-    public static final RegistryObject<Block> BIOFUEL_GENERATOR = BLOCKS.register("biofuel_generator", BlockBase::new);
+    public static final RegistryObject<Block> BIOFUEL_GENERATOR = BLOCKS.register("biofuel_generator", BiofuelGenerator::new);
     public static final RegistryObject<Item> BIOFUEL_GENERATOR_ITEM = ITEMS.register("biofuel_generator", () -> new BlockItem(BIOFUEL_GENERATOR.get(), new Item.Properties().group(MinedustryMain.TAB)));
 }

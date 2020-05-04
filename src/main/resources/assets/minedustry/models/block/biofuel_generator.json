@@ -1,6 +1,12 @@
 {
-  "parent": "block/cube_all",
+  "parent": "block/cube",
   "textures": {
-    "all": "minedustry:block/biofuel_generator"
+    "particle": "minedustry:block/biofuel_generator",
+    "down": "minedustry:block/biofuel_generator",
+    "up": "minedustry:block/biofuel_generator_top",
+    "east": "minedustry:block/biofuel_generator",
+    "west": "minedustry:block/biofuel_generator",
+    "north": "minedustry:block/biofuel_generator_front",
+    "south": "minedustry:block/biofuel_generator"
   }
 }
