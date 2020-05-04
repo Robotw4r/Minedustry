@@ -2,6 +2,8 @@ package org.minedustry.utilities;
 
 import net.minecraft.inventory.container.ContainerType;
 import net.minecraft.tileentity.TileEntityType;
+import net.minecraft.util.math.BlockPos;
+import net.minecraftforge.common.extensions.IForgeContainerType;
 import org.minedustry.MinedustryMain;
 import org.minedustry.References;
 import org.minedustry.blocks.BiofuelGenerator;
@@ -45,4 +47,5 @@ public class RegistryHandler {
     public static final RegistryObject<Item> THORIUM_BLOCK_ITEM = ITEMS.register("thorium_block", () -> new BlockItem(THORIUM_BLOCK.get(), new Item.Properties().group(MinedustryMain.TAB)));
     public static final RegistryObject<Block> BIOFUEL_GENERATOR = BLOCKS.register("biofuel_generator", BiofuelGenerator::new);
     public static final RegistryObject<Item> BIOFUEL_GENERATOR_ITEM = ITEMS.register("biofuel_generator", () -> new BlockItem(BIOFUEL_GENERATOR.get(), new Item.Properties().group(MinedustryMain.TAB)));
+
 }
