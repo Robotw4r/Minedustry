@@ -48,5 +48,5 @@ public class BiofuelGenerator extends Block {
     @Override
     protected void fillStateContainer(StateContainer.Builder<Block, BlockState> builder) {
         builder.add(BlockStateProperties.FACING);
-    }x  
+    }
 }
