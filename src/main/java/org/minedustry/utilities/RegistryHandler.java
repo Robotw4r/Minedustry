@@ -1,18 +1,16 @@
 package org.minedustry.utilities;
 
-import net.minecraft.inventory.container.ContainerType;
-import net.minecraft.tileentity.TileEntityType;
-import net.minecraft.util.math.BlockPos;
-import net.minecraftforge.common.extensions.IForgeContainerType;
-import org.minedustry.MinedustryMain;
 import org.minedustry.References;
 import org.minedustry.blocks.BiofuelGenerator;
 import org.minedustry.blocks.BlockBase;
 import org.minedustry.items.ItemBase;
+
 import net.minecraft.block.Block;
 import net.minecraft.fluid.Fluid;
+import net.minecraft.inventory.container.ContainerType;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
+import net.minecraft.tileentity.TileEntityType;
 import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.registries.DeferredRegister;
@@ -40,12 +38,12 @@ public class RegistryHandler {
 
     //List of mod blocks
     public static final RegistryObject<Block> PLATINUM_BLOCK = BLOCKS.register("platinum_block", BlockBase::new);
-    public static final RegistryObject<Item> PLATINUM_BLOCK_ITEM = ITEMS.register("platinum_block", () -> new BlockItem(PLATINUM_BLOCK.get(), new Item.Properties().group(MinedustryMain.TAB)));
+    public static final RegistryObject<Item> PLATINUM_BLOCK_ITEM = ITEMS.register("platinum_block", () -> new BlockItem(PLATINUM_BLOCK.get(), new Item.Properties().group(Tabs.BLOCKS)));
     public static final RegistryObject<Block> COBALT_BLOCK = BLOCKS.register("cobalt_block", BlockBase::new);
-    public static final RegistryObject<Item> COBALT_BLOCK_ITEM = ITEMS.register("cobalt_block", () -> new BlockItem(COBALT_BLOCK.get(), new Item.Properties().group(MinedustryMain.TAB)));
+    public static final RegistryObject<Item> COBALT_BLOCK_ITEM = ITEMS.register("cobalt_block", () -> new BlockItem(COBALT_BLOCK.get(), new Item.Properties().group(Tabs.BLOCKS)));
     public static final RegistryObject<Block> THORIUM_BLOCK = BLOCKS.register("thorium_block", BlockBase::new);
-    public static final RegistryObject<Item> THORIUM_BLOCK_ITEM = ITEMS.register("thorium_block", () -> new BlockItem(THORIUM_BLOCK.get(), new Item.Properties().group(MinedustryMain.TAB)));
+    public static final RegistryObject<Item> THORIUM_BLOCK_ITEM = ITEMS.register("thorium_block", () -> new BlockItem(THORIUM_BLOCK.get(), new Item.Properties().group(Tabs.BLOCKS)));
     public static final RegistryObject<Block> BIOFUEL_GENERATOR = BLOCKS.register("biofuel_generator", BiofuelGenerator::new);
-    public static final RegistryObject<Item> BIOFUEL_GENERATOR_ITEM = ITEMS.register("biofuel_generator", () -> new BlockItem(BIOFUEL_GENERATOR.get(), new Item.Properties().group(MinedustryMain.TAB)));
+    public static final RegistryObject<Item> BIOFUEL_GENERATOR_ITEM = ITEMS.register("biofuel_generator", () -> new BlockItem(BIOFUEL_GENERATOR.get(), new Item.Properties().group(Tabs.BLOCKS)));
 
 }
