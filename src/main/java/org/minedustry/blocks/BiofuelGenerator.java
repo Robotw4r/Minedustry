@@ -21,10 +21,8 @@ public class BiofuelGenerator extends Block
 	public BiofuelGenerator()
 	{
 		super(Properties.create(Material.IRON).sound(SoundType.METAL).hardnessAndResistance(2.0f).lightValue(14).harvestTool(ToolType.PICKAXE));
-	}
-
+	}	
 	
-
 	@Override
 	public void onBlockPlacedBy(World world, BlockPos pos, BlockState state, @Nullable LivingEntity entity, ItemStack stack)
 	{
