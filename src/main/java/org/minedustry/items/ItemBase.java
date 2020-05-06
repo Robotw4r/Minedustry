@@ -9,7 +9,7 @@ public class ItemBase extends Item
 {
 	public ItemBase(String registryName)
 	{
-		super(new Item.Properties().group(Tabs.BLOCKS));
+		super(new Item.Properties().group(Tabs.ITEMS));
 		this.setRegistryName(References.MODID, registryName);
 	}
 }

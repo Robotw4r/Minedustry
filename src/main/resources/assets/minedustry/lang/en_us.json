@@ -2,11 +2,16 @@
   "item.minedustry.platinum_ingot": "Platinum Ingot",
   "item.minedustry.cobalt_ingot": "Cobalt Ingot",
   "item.minedustry.thorium_ingot": "Thorium Ingot",
+  "item.minedustry.bismuth_chunk": "Bismuth Chunk",
+  
   "block.minedustry.platinum_block": "Platinum Block",
   "block.minedustry.cobalt_block": "Cobalt Block",
   "block.minedustry.thorium_block": "Thorium Block",
+  "block.minedustry.bismuth_block": "Bismuth Block",
+  
   "block.minedustry.biofuel_generator": "Biofuel Generator",
   
   "itemGroup.minedustry.items": "Minedustry Items",
-  "itemGroup.minedustry.blocks": "Minedustry Blocks"
+  "itemGroup.minedustry.blocks": "Minedustry Blocks",
+  "itemGroup.minedustry.machines": "Minedustry Machines"
 }

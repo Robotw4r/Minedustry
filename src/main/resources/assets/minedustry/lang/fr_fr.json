@@ -2,11 +2,16 @@
   "item.minedustry.platinum_ingot": "Lingot de Platine",
   "item.minedustry.cobalt_ingot": "Lingot de Cobalt",
   "item.minedustry.thorium_ingot": "Lingot de Thorium",
+    "item.minedustry.bismuth_chunk": "Morceau de Bismuth",
+    
   "block.minedustry.platinum_block": "Bloc de Platine",
   "block.minedustry.cobalt_block": "Bloc de Cobalt",
   "block.minedustry.thorium_block": "Bloc de Thorium",
+    "block.minedustry.bismuth_block": "Bloc de Bismuth",
+  
   "block.minedustry.biofuel_generator": "Generateur à carburant biologique",
   
   "itemGroup.minedustry.items": "Objets de Minedustry",
-  "itemGroup.minedustry.blocks": "Blocs de Minedustry"
+  "itemGroup.minedustry.blocks": "Blocs de Minedustry",
+  "itemGroup.minedustry.machines": "Minedustry Machines"
 }
