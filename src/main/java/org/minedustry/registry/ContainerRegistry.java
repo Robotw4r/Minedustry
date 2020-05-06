@@ -1,5 +1,6 @@
 package org.minedustry.registry;
 
+import org.minedustry.MinedustryMain;
 import org.minedustry.References;
 import org.minedustry.container.ContainerBioFuelGenerator;
 
@@ -19,7 +20,11 @@ public class ContainerRegistry
 	@SubscribeEvent
 	public static void registerContainers(RegistryEvent.Register<ContainerType<?>> event)
 	{
+		MinedustryMain.LOGGER.debug("Registering Containes...");
+		
 		event.getRegistry().register(IForgeContainerType.create((id, inv, data) -> new ContainerBioFuelGenerator(id, inv, data.readBlockPos())).setRegistryName(getLoc("bio_fuel_generator")));
+
+		MinedustryMain.LOGGER.debug("Containers Successfully Registered !");
 	}
 	
 	private static ResourceLocation getLoc(String path)

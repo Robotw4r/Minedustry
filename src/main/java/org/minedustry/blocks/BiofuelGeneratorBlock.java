@@ -2,6 +2,7 @@ package org.minedustry.blocks;
 
 import javax.annotation.Nullable;
 
+import org.minedustry.References;
 import org.minedustry.tileentity.TileBioFuelGenerator;
 
 import net.minecraft.block.Block;
@@ -24,11 +25,12 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.ToolType;
 import net.minecraftforge.fml.network.NetworkHooks;
 
-public class BiofuelGenerator extends Block
+public class BiofuelGeneratorBlock extends Block
 {
-	public BiofuelGenerator()
+	public BiofuelGeneratorBlock()
 	{
 		super(Properties.create(Material.IRON).sound(SoundType.METAL).hardnessAndResistance(2.0f).lightValue(14).harvestTool(ToolType.PICKAXE));
+		this.setRegistryName(References.MODID, "biofuel_generator");
 	}
 	
 	@Override

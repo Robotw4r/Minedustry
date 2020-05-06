@@ -1,5 +1,8 @@
 package org.minedustry.utilities;
 
+import org.minedustry.registry.BlockRegistry;
+import org.minedustry.registry.ItemRegistry;
+
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
 
@@ -10,7 +13,7 @@ public class Tabs
 		@Override
 		public ItemStack createIcon()
 		{
-			return new ItemStack(RegistryHandler.PLATINUM_INGOT.get());
+			return new ItemStack(ItemRegistry.PLATINUM_INGOT);
 		}
 	};
 	
@@ -19,7 +22,7 @@ public class Tabs
 		@Override
 		public ItemStack createIcon()
 		{
-			return new ItemStack(RegistryHandler.COBALT_BLOCK.get());
+			return new ItemStack(BlockRegistry.COBALT_BLOCK);
 		}
 	};
 }

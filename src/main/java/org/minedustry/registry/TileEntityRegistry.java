@@ -1,8 +1,8 @@
 package org.minedustry.registry;
 
+import org.minedustry.MinedustryMain;
 import org.minedustry.References;
 import org.minedustry.tileentity.TileBioFuelGenerator;
-import org.minedustry.utilities.RegistryHandler;
 
 import net.minecraft.tileentity.TileEntityType;
 import net.minecraft.util.ResourceLocation;
@@ -21,7 +21,11 @@ public class TileEntityRegistry
 	@SubscribeEvent
 	public static void registerTileEntities(RegistryEvent.Register<TileEntityType<?>> event)
 	{
-		event.getRegistry().register(TileEntityType.Builder.create(TileBioFuelGenerator::new, RegistryHandler.BIOFUEL_GENERATOR.get()).build(null).setRegistryName(getLoc("bio_fuel_generator")));
+		MinedustryMain.LOGGER.debug("Registering Tile Entities...");
+		
+		event.getRegistry().register(TileEntityType.Builder.create(TileBioFuelGenerator::new, BlockRegistry.BIOFUEL_GENERATOR).build(null).setRegistryName(getLoc("bio_fuel_generator")));
+
+		MinedustryMain.LOGGER.debug("Tile Entities Successfully Registered !");
 	}
 	
 	private static ResourceLocation getLoc(String path)

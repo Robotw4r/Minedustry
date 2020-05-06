@@ -4,7 +4,6 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.minedustry.registry.ContainerRegistry;
 import org.minedustry.screens.BioFuelGeneratorScreen;
-import org.minedustry.utilities.RegistryHandler;
 
 import net.minecraft.client.gui.ScreenManager;
 import net.minecraftforge.common.MinecraftForge;
@@ -16,13 +15,11 @@ import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 @Mod(References.MODID)
 public class MinedustryMain {
 	
-    private static final Logger LOGGER = LogManager.getLogger(References.MODNAME);
+    public static final Logger LOGGER = LogManager.getLogger(References.MODNAME);
 
     public MinedustryMain() {
         FMLJavaModLoadingContext.get().getModEventBus().addListener(this::setup);
         FMLJavaModLoadingContext.get().getModEventBus().addListener(this::doClientStuff);
-
-        RegistryHandler.init();
 
         MinecraftForge.EVENT_BUS.register(this);
     }
