@@ -34,6 +34,7 @@ public abstract class TileEntityStorage extends TileEntity implements IItemHandl
 			return TileEntityStorage.this.isItemValid(slot, stack);
 		}
 	};
+	
 	private ITextComponent name;
 
 	public TileEntityStorage(TileEntityType<?> type)
@@ -98,10 +99,7 @@ public abstract class TileEntityStorage extends TileEntity implements IItemHandl
 
 	@Nullable
 	@Override
-	public Container createMenu(int guiId, PlayerInventory inv, PlayerEntity player)
-	{
-		return null;//new EnchantmentsControllerContainer(guiId, inv, this.pos);
-	}
+	public abstract Container createMenu(int guiId, PlayerInventory inv, PlayerEntity player);
 
 	@Override
 	public ITextComponent getName()

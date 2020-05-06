@@ -2,10 +2,8 @@ package org.minedustry;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.minedustry.registry.ContainerRegistry;
-import org.minedustry.screens.BioFuelGeneratorScreen;
+import org.minedustry.registry.ClientRegistry;
 
-import net.minecraft.client.gui.ScreenManager;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
@@ -26,8 +24,5 @@ public class MinedustryMain {
 
     private void setup(final FMLCommonSetupEvent event) { }
 
-    private void doClientStuff(final FMLClientSetupEvent event)
-    {
-    	ScreenManager.registerFactory(ContainerRegistry.BIO_FUEL_GENERATOR, BioFuelGeneratorScreen::new);
-    }
+    private void doClientStuff(final FMLClientSetupEvent event) { new ClientRegistry(); }
 }

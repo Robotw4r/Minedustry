@@ -17,16 +17,17 @@ public class ContainerBioFuelGenerator extends Container implements IHasContaine
 
 	public ContainerBioFuelGenerator(int id, PlayerInventory playerInv, BlockPos pos)
 	{
-		super(ContainerRegistry.BIO_FUEL_GENERATOR, id);
+		super(ContainerRegistry.BIOFUEL_GENERATOR, id);
+		
 		final TileEntity tile = playerInv.player.getEntityWorld().getTileEntity(pos);
 
-		if (tile instanceof TileEntityStorage)
+		if(tile instanceof TileEntityStorage)
 		{
 			final TileEntityStorage storage = (TileEntityStorage) tile;
 			this.tile = storage;
 
 			// this.addSlot(new SlotItemHandler(storage, 0, 19, 55));
-			// this.bindPlayerInventory(playerInv, 7, 83);
+			this.bindPlayerInventory(playerInv, 7, 83);
 		}
 	}
 

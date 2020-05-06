@@ -7,7 +7,6 @@ import org.minedustry.tileentity.TileBioFuelGenerator;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
-import net.minecraft.block.HorizontalBlock;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.LivingEntity;
@@ -15,12 +14,14 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.state.StateContainer;
+import net.minecraft.state.properties.BlockStateProperties;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ActionResultType;
 import net.minecraft.util.Direction;
 import net.minecraft.util.Hand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.BlockRayTraceResult;
-import net.minecraft.util.math.Vec3d;
+import net.minecraft.world.IBlockReader;
 import net.minecraft.world.World;
 import net.minecraftforge.common.ToolType;
 import net.minecraftforge.fml.network.NetworkHooks;
@@ -41,6 +42,7 @@ public class BiofuelGeneratorBlock extends Block
 			if(worldIn.getTileEntity(pos) instanceof TileBioFuelGenerator)
 			{
 				NetworkHooks.openGui((ServerPlayerEntity) player, (TileBioFuelGenerator) worldIn.getTileEntity(pos), pos);
+				return ActionResultType.SUCCESS;
 			}
 		}
 		
@@ -48,23 +50,34 @@ public class BiofuelGeneratorBlock extends Block
 	}
 	
 	@Override
+	public TileEntity createTileEntity(BlockState state, IBlockReader world)
+	{
+		return new TileBioFuelGenerator();
+	}
+	
+	@Override
+	public boolean hasTileEntity(BlockState state)
+	{
+		return true;
+	}
+	
+	@Override
 	public void onBlockPlacedBy(World world, BlockPos pos, BlockState state, @Nullable LivingEntity entity, ItemStack stack)
 	{
 		if (entity != null)
 		{
-			world.setBlockState(pos, state.with(HorizontalBlock.HORIZONTAL_FACING, getFacingFromEntity(pos, entity)), 2);
+			world.setBlockState(pos, state.with(BlockStateProperties.HORIZONTAL_FACING, getFacingFromEntity(pos, entity)), 2);
 		}
 	}
 
 	public static Direction getFacingFromEntity(BlockPos clickedBlock, LivingEntity entity)
 	{
-		Vec3d vec = entity.getPositionVec();
-		return Direction.getFacingFromVector((float) (vec.x - clickedBlock.getX()), (float) (vec.y - clickedBlock.getY()), (float) (vec.z - clickedBlock.getZ()));
+		return entity.getHorizontalFacing().getOpposite();
 	}
 
 	@Override
 	protected void fillStateContainer(StateContainer.Builder<Block, BlockState> builder)
 	{
-		builder.add(HorizontalBlock.HORIZONTAL_FACING);
+		builder.add(BlockStateProperties.HORIZONTAL_FACING);
 	}
 }

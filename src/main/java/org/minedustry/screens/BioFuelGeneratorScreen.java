@@ -3,8 +3,11 @@ package org.minedustry.screens;
 import org.minedustry.container.ContainerBioFuelGenerator;
 import org.minedustry.tileentity.TileEntityStorage;
 
+import com.mojang.blaze3d.systems.RenderSystem;
+
 import net.minecraft.client.gui.screen.inventory.ContainerScreen;
 import net.minecraft.entity.player.PlayerInventory;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.ITextComponent;
 
 public class BioFuelGeneratorScreen extends ContainerScreen<ContainerBioFuelGenerator>
@@ -17,12 +20,21 @@ public class BioFuelGeneratorScreen extends ContainerScreen<ContainerBioFuelGene
 		this.setSize(176, 166);
 		this.tile = screen.tile;
 	}
+	
+	@Override
+	public void render(int p_render_1_, int p_render_2_, float p_render_3_)
+	{
+		super.render(p_render_1_, p_render_2_, p_render_3_);
+		this.renderHoveredToolTip(p_render_1_, p_render_2_);
+	}
 
 	@Override
 	protected void drawGuiContainerBackgroundLayer(float partialTicks, int mouseX, int mouseY)
 	{
-		// TODO Auto-generated method stub
-		
+		RenderSystem.color4f(1.0F, 1.0F, 1.0F, 1.0F);
+	    this.minecraft.getTextureManager().bindTexture(new ResourceLocation("textures/gui/container/dispenser.png")); // Test to show a GUI
+	    int x = (this.width - this.xSize) / 2;
+	    int y = (this.height - this.ySize) / 2;
+	    this.blit(x, y, 0, 0, this.xSize, this.ySize);
 	}
-
 }

@@ -16,14 +16,14 @@ import net.minecraftforge.registries.ObjectHolder;
 @EventBusSubscriber(modid = References.MODID, bus = Bus.MOD)
 public class TileEntityRegistry
 {
-	public static final TileEntityType<TileBioFuelGenerator> BIO_FUEL_GENERATOR = null;
+	public static final TileEntityType<TileBioFuelGenerator> BIOFUEL_GENERATOR = TileEntityType.Builder.create(TileBioFuelGenerator::new, BlockRegistry.BIOFUEL_GENERATOR).build(null);
 	
 	@SubscribeEvent
 	public static void registerTileEntities(RegistryEvent.Register<TileEntityType<?>> event)
 	{
 		MinedustryMain.LOGGER.debug("Registering Tile Entities...");
 		
-		event.getRegistry().register(TileEntityType.Builder.create(TileBioFuelGenerator::new, BlockRegistry.BIOFUEL_GENERATOR).build(null).setRegistryName(getLoc("bio_fuel_generator")));
+		event.getRegistry().register(BIOFUEL_GENERATOR.setRegistryName(getLoc("bio_fuel_generator")));
 
 		MinedustryMain.LOGGER.debug("Tile Entities Successfully Registered !");
 	}
