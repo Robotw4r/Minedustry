@@ -7,5 +7,6 @@
   "block.minedustry.thorium_block": "Thorium Block",
   "block.minedustry.biofuel_generator": "Biofuel Generator",
   
-  "itemGroup.minedustry": "Minedustry"
+  "itemGroup.minedustry.items": "Minedustry Items",
+  "itemGroup.minedustry.blocks": "Minedustry Blocks"
 }

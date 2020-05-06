@@ -7,5 +7,6 @@
   "block.minedustry.thorium_block": "Bloc de Thorium",
   "block.minedustry.biofuel_generator": "Generateur à carburant biologique",
   
-  "itemGroup.minedustry": "Minedustry"
+  "itemGroup.minedustry.items": "Objets de Minedustry",
+  "itemGroup.minedustry.blocks": "Blocs de Minedustry"
 }
