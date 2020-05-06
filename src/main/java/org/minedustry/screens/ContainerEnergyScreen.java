@@ -6,6 +6,7 @@ import javax.annotation.Nullable;
 
 import org.minedustry.utilities.BarTexture;
 
+import net.minecraft.client.gui.AbstractGui;
 import net.minecraft.client.gui.screen.inventory.ContainerScreen;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.container.Container;
@@ -75,35 +76,68 @@ public abstract class ContainerEnergyScreen<T extends Container> extends Contain
 	protected void drawGuiContainerForegroundLayer(int mouseX, int mouseY)
 	{
 		if(isBarSet())
-		{			
-			if(isLarge)
+		{
+			if(isTextured)
 			{
-				this.getMinecraft().getTextureManager().bindTexture(emptyBarTexture.getTexture());
-				this.blit(barX, barY, emptyBarTexture.getX(), emptyBarTexture.getHeight(), width, height);
-
-				this.getMinecraft().getTextureManager().bindTexture(barTexture.getTexture());
-				
-				int width = MathHelper.floor(this.getCurrentEnergy() / this.getMaxEnergy() * this.barTexture.getWidth());
-				
-				this.blit(barX, barY, barTexture.getX(), barTexture.getY(), width, height);
+				this.drawTexturedEnergyBar();
 			}
 			else
 			{
-				this.getMinecraft().getTextureManager().bindTexture(barTexture.getTexture());
-				this.blit(barX, barY, barTexture.getX(), barTexture.getHeight(), width, height);
-
-				this.getMinecraft().getTextureManager().bindTexture(emptyBarTexture.getTexture());
-				
-				int height = this.emptyBarTexture.getHeight() - MathHelper.floor(this.getCurrentEnergy() / this.getMaxEnergy() * this.emptyBarTexture.getHeight());
-				
-				this.blit(barX, barY, emptyBarTexture.getX(), emptyBarTexture.getY(), width, height);
+				this.drawEnergyBar();
 			}
+			
 		}
 	}
 	
+	private void drawEnergyBar()
+	{
+		if(isLarge)
+		{
+			AbstractGui.fill(barX, barY, height, width, backgroundColor);
+			
+			int width = MathHelper.floor(this.getCurrentEnergy() / this.getMaxEnergy() * this.width);
+			
+			AbstractGui.fill(barX, barY, width, height, this.color);
+		}
+		else
+		{
+			AbstractGui.fill(barX, barY, height, width, backgroundColor);
+			
+			int height = this.height - MathHelper.floor(this.getCurrentEnergy() / this.getMaxEnergy() * this.height);
+
+			AbstractGui.fill(barX, barY, width, height, this.color);
+		}
+	}
+
+	private void drawTexturedEnergyBar()
+	{
+		if(isLarge)
+		{
+			this.getMinecraft().getTextureManager().bindTexture(emptyBarTexture.getTexture());
+			this.blit(barX, barY, emptyBarTexture.getX(), emptyBarTexture.getHeight(), width, height);
+
+			this.getMinecraft().getTextureManager().bindTexture(barTexture.getTexture());
+			
+			int width = MathHelper.floor(this.getCurrentEnergy() / this.getMaxEnergy() * this.barTexture.getWidth());
+			
+			this.blit(barX, barY, barTexture.getX(), barTexture.getY(), width, height);
+		}
+		else
+		{
+			this.getMinecraft().getTextureManager().bindTexture(barTexture.getTexture());
+			this.blit(barX, barY, barTexture.getX(), barTexture.getHeight(), width, height);
+
+			this.getMinecraft().getTextureManager().bindTexture(emptyBarTexture.getTexture());
+			
+			int height = this.emptyBarTexture.getHeight() - MathHelper.floor(this.getCurrentEnergy() / this.getMaxEnergy() * this.emptyBarTexture.getHeight());
+			
+			this.blit(barX, barY, emptyBarTexture.getX(), emptyBarTexture.getY(), width, height);
+		}		
+	}
+
 	private boolean isBarSet()
 	{
-		return barWidth > 0 && barHeight > 0 && this.barTexture != null && this.emptyBarTexture != null;
+		return barWidth > 0 && barHeight > 0;
 	}
 	
 	public boolean isInRectangle(int mouseX, int mouseY, int x, int y, int width, int height)
