@@ -28,15 +28,20 @@ public abstract class ContainerEnergyScreen<T extends Container> extends Contain
 	public ContainerEnergyScreen(T screenContainer, PlayerInventory inv, ITextComponent titleIn)
 	{
 		super(screenContainer, inv, titleIn);
+		this.currentEnergy = 0;
 	}
 	
-	public void updateEnergy(int energy, int maxEnergy)
+	public void updateEnergy(int energy)
 	{
 		this.currentEnergy = energy;
-		this.maxEnergy = maxEnergy;
 	}
 	
-	public void addEnergyBar(int x, int y, int width, int height, boolean isLarge, int color, int backgroundColor, @Nullable List<String> tooltip)
+	public void updateTooltip(List<String> list)
+	{
+		this.tooltip = list;
+	}
+	
+	public void addEnergyBar(int maxEnergy, int x, int y, int width, int height, boolean isLarge, int color, int backgroundColor, @Nullable List<String> tooltip)
 	{
 		this.barX = x;
 		this.barY = y;
@@ -46,9 +51,11 @@ public abstract class ContainerEnergyScreen<T extends Container> extends Contain
 		this.color = color;
 		this.backgroundColor = backgroundColor;
 		this.tooltip = tooltip;
+		this.maxEnergy = maxEnergy;
+		this.isTextured = false;
 	}
 	
-	public void addTexturedEnergyBar(int x, int y, int width, int height, boolean isLarge, BarTexture bar, BarTexture emptyBar, @Nullable List<String> tooltip)
+	public void addTexturedEnergyBar(int maxEnergy, int x, int y, int width, int height, boolean isLarge, BarTexture bar, BarTexture emptyBar, @Nullable List<String> tooltip)
 	{
 		this.barX = x;
 		this.barY = y;
@@ -58,6 +65,8 @@ public abstract class ContainerEnergyScreen<T extends Container> extends Contain
 		this.barTexture = bar;
 		this.emptyBarTexture = emptyBar;
 		this.tooltip = tooltip;
+		this.maxEnergy = maxEnergy;
+		this.isTextured = true;
 	}
 	
 	@Override
@@ -66,7 +75,7 @@ public abstract class ContainerEnergyScreen<T extends Container> extends Contain
 		super.render(mouseX, mouseY, partialTicks);
 		this.renderHoveredToolTip(mouseX, mouseY);
 		
-		if(isInRectangle(mouseX, mouseY, barX, barY, barWidth, barHeight) && tooltip != null)
+		if(isInRectangle(mouseX, mouseY, barX, barY, barWidth, barHeight) && tooltip != null && !tooltip.isEmpty())
 		{
 			this.renderTooltip(tooltip, mouseX, mouseY, this.minecraft.fontRenderer);
 		}
@@ -93,19 +102,19 @@ public abstract class ContainerEnergyScreen<T extends Container> extends Contain
 	{
 		if(isLarge)
 		{
-			AbstractGui.fill(barX, barY, height, width, backgroundColor);
+			AbstractGui.fill(barX, barY, barWidth, barHeight, backgroundColor);
 			
-			int width = MathHelper.floor(this.getCurrentEnergy() / this.getMaxEnergy() * this.width);
+			int width = MathHelper.floor(this.getCurrentEnergy() / this.getMaxEnergy() * this.barWidth);
 			
-			AbstractGui.fill(barX, barY, width, height, this.color);
+			AbstractGui.fill(barX, barY, width, barHeight, this.color);
 		}
 		else
 		{
-			AbstractGui.fill(barX, barY, height, width, backgroundColor);
+			AbstractGui.fill(barX, barY, barWidth, barHeight, backgroundColor);
 			
-			int height = this.height - MathHelper.floor(this.getCurrentEnergy() / this.getMaxEnergy() * this.height);
-
-			AbstractGui.fill(barX, barY, width, height, this.color);
+			int height = this.barHeight - MathHelper.floor(this.getCurrentEnergy() / this.getMaxEnergy() * this.barHeight);
+			
+			AbstractGui.fill(barX, barY, barWidth, height, this.color);
 		}
 	}
 
@@ -114,24 +123,24 @@ public abstract class ContainerEnergyScreen<T extends Container> extends Contain
 		if(isLarge)
 		{
 			this.getMinecraft().getTextureManager().bindTexture(emptyBarTexture.getTexture());
-			this.blit(barX, barY, emptyBarTexture.getX(), emptyBarTexture.getHeight(), width, height);
+			this.blit(barX, barY, emptyBarTexture.getX(), emptyBarTexture.getHeight(), barWidth, barHeight);
 
 			this.getMinecraft().getTextureManager().bindTexture(barTexture.getTexture());
 			
 			int width = MathHelper.floor(this.getCurrentEnergy() / this.getMaxEnergy() * this.barTexture.getWidth());
 			
-			this.blit(barX, barY, barTexture.getX(), barTexture.getY(), width, height);
+			this.blit(barX, barY, barTexture.getX(), barTexture.getY(), width, barHeight);
 		}
 		else
 		{
 			this.getMinecraft().getTextureManager().bindTexture(barTexture.getTexture());
-			this.blit(barX, barY, barTexture.getX(), barTexture.getHeight(), width, height);
+			this.blit(barX, barY, barTexture.getX(), barTexture.getHeight(), barWidth, height);
 
 			this.getMinecraft().getTextureManager().bindTexture(emptyBarTexture.getTexture());
 			
 			int height = this.emptyBarTexture.getHeight() - MathHelper.floor(this.getCurrentEnergy() / this.getMaxEnergy() * this.emptyBarTexture.getHeight());
 			
-			this.blit(barX, barY, emptyBarTexture.getX(), emptyBarTexture.getY(), width, height);
+			this.blit(barX, barY, emptyBarTexture.getX(), emptyBarTexture.getY(), barWidth, height);
 		}		
 	}
 
@@ -145,12 +154,12 @@ public abstract class ContainerEnergyScreen<T extends Container> extends Contain
 		return mouseX > barX && mouseX < barX + width && mouseY > barY && mouseY < barY + height;
 	}
 	
-	public int getCurrentEnergy()
+	public double getCurrentEnergy()
 	{
 		return this.currentEnergy;
 	}
 	
-	public int getMaxEnergy()
+	public double getMaxEnergy()
 	{
 		return this.maxEnergy;
 	}
