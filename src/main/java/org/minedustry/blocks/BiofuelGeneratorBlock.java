@@ -7,6 +7,7 @@ import org.minedustry.tileentity.TileBioFuelGenerator;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
+import net.minecraft.block.HorizontalBlock;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.LivingEntity;
@@ -14,7 +15,6 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.state.StateContainer;
-import net.minecraft.state.properties.BlockStateProperties;
 import net.minecraft.util.ActionResultType;
 import net.minecraft.util.Direction;
 import net.minecraft.util.Hand;
@@ -26,7 +26,7 @@ import net.minecraftforge.common.ToolType;
 import net.minecraftforge.fml.network.NetworkHooks;
 
 public class BiofuelGeneratorBlock extends Block
-{
+{	
 	public BiofuelGeneratorBlock()
 	{
 		super(Properties.create(Material.IRON).sound(SoundType.METAL).hardnessAndResistance(2.0f).lightValue(14).harvestTool(ToolType.PICKAXE));
@@ -52,7 +52,7 @@ public class BiofuelGeneratorBlock extends Block
 	{
 		if (entity != null)
 		{
-			world.setBlockState(pos, state.with(BlockStateProperties.FACING, getFacingFromEntity(pos, entity)), 2);
+			world.setBlockState(pos, state.with(HorizontalBlock.HORIZONTAL_FACING, getFacingFromEntity(pos, entity)), 2);
 		}
 	}
 
@@ -65,6 +65,6 @@ public class BiofuelGeneratorBlock extends Block
 	@Override
 	protected void fillStateContainer(StateContainer.Builder<Block, BlockState> builder)
 	{
-		builder.add(BlockStateProperties.FACING);
+		builder.add(HorizontalBlock.HORIZONTAL_FACING);
 	}
 }

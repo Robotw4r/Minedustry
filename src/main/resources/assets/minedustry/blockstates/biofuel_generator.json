@@ -3,8 +3,6 @@
     "facing=north": { "model": "minedustry:block/biofuel_generator" },
     "facing=south": { "model": "minedustry:block/biofuel_generator", "y": 180 },
     "facing=west": { "model": "minedustry:block/biofuel_generator", "y": 270 },
-    "facing=east": { "model": "minedustry:block/biofuel_generator", "y": 90 },
-    "facing=up": { "model": "minedustry:block/biofuel_generator", "x": -90 },
-    "facing=down": { "model": "minedustry:block/biofuel_generator", "x": 90 }
+    "facing=east": { "model": "minedustry:block/biofuel_generator", "y": 90 }
     }
 }
