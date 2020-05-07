@@ -21,7 +21,7 @@ public class BioFuelGeneratorScreen extends ContainerEnergyScreen<ContainerBioFu
 	{
 		super(screen, inv, title);
 		this.setSize(176, 166);
-		this.addTexturedEnergyBar(100, 10, 10, 20, 70, false, new BarTexture(new ResourceLocation("textures/block/stone.png"), 0, 0, 10, 2), new BarTexture(new ResourceLocation("textures/block/glowstone.png"), 0, 0, 10, 2), null);
+		this.addTexturedEnergyBar(100, 10, 10, 20, 70, false, new BarTexture(new ResourceLocation("minedustry:textures/gui/energybar.png"), 0, 0, 10, 2), new BarTexture(new ResourceLocation("minedustry:textures/gui/energybarbackground.png"), 0, 0, 10, 2), null);
 		this.tile = screen.tile;
 	}
 	
