@@ -3,6 +3,7 @@ package org.minedustry.screens;
 import java.math.BigDecimal;
 import java.util.Arrays;
 
+import org.minedustry.References;
 import org.minedustry.container.ContainerBioFuelGenerator;
 import org.minedustry.tileentity.TileEntityStorage;
 import org.minedustry.utilities.BarTexture;
@@ -21,7 +22,7 @@ public class BioFuelGeneratorScreen extends ContainerEnergyScreen<ContainerBioFu
 	{
 		super(screen, inv, title);
 		this.setSize(176, 166);
-		this.addTexturedEnergyBar(100, 10, 10, 20, 70, false, new BarTexture(new ResourceLocation("minedustry:textures/gui/energybar.png"), 0, 0, 10, 2), new BarTexture(new ResourceLocation("minedustry:textures/gui/energybarbackground.png"), 0, 0, 10, 2), null);
+		this.addTexturedEnergyBar(100, 10, 10, 20, 70, false, new BarTexture(References.getLoc("textures/gui/energybar.png"), 0, 0, 10, 2), new BarTexture(References.getLoc("textures/gui/energybarbackground.png"), 0, 0, 10, 2), null);
 		this.tile = screen.tile;
 	}
 	
@@ -29,7 +30,6 @@ public class BioFuelGeneratorScreen extends ContainerEnergyScreen<ContainerBioFu
 	public void render(int mouseX, int mouseY, float partialTicks)
 	{
 		int energy = 10;
-		// tile.getUpdateTag()
 		this.updateTooltip(Arrays.asList("Energy : " + energy + "/" + BigDecimal.valueOf(this.getMaxEnergy()).setScale(0).doubleValue()));
 		this.updateEnergy(10);
 		super.render(mouseX, mouseY, partialTicks);

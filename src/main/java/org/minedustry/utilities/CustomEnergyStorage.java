@@ -53,10 +53,10 @@ public class CustomEnergyStorage extends EnergyStorage implements INBTSerializab
 	public CompoundNBT serializeNBT()
 	{
 		CompoundNBT tag = new CompoundNBT();
-		tag.putInt("Energy", getEnergyStored());
-		tag.putInt("Capacity", getMaxEnergyStored());
-		tag.putInt("ExtractCapacity", getMaxExtract());
-		tag.putInt("InsertCapacity", getMaxReceive());
+		tag.putInt(NBTs.ENERGY, getEnergyStored());
+		tag.putInt(NBTs.MAX_ENERGY, getMaxEnergyStored());
+		tag.putInt(NBTs.MAX_EXTRACT, getMaxExtract());
+		tag.putInt(NBTs.MAX_INSERT, getMaxReceive());
 		return tag;
 	}
 
