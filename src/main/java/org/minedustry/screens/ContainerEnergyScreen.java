@@ -1,5 +1,6 @@
 package org.minedustry.screens;
 
+import java.util.Arrays;
 import java.util.List;
 
 import javax.annotation.Nullable;
@@ -8,6 +9,7 @@ import org.minedustry.utilities.BarTexture;
 
 import net.minecraft.client.gui.AbstractGui;
 import net.minecraft.client.gui.screen.inventory.ContainerScreen;
+import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.container.Container;
 import net.minecraft.util.math.MathHelper;
@@ -75,9 +77,12 @@ public abstract class ContainerEnergyScreen<T extends Container> extends Contain
 		super.render(mouseX, mouseY, partialTicks);
 		this.renderHoveredToolTip(mouseX, mouseY);
 		
-		if(isInRectangle(mouseX, mouseY, barX, barY, barWidth, barHeight) && tooltip != null && !tooltip.isEmpty())
+		if(isInRectangle(mouseX, mouseY, barX, barY, barWidth, barHeight))
 		{
-			this.renderTooltip(tooltip, mouseX, mouseY, this.minecraft.fontRenderer);
+			if(tooltip != null && !tooltip.isEmpty())
+				this.renderTooltip(tooltip, mouseX, mouseY, this.minecraft.fontRenderer);
+			else
+				this.renderTooltip(Arrays.asList(I18n.format("Energy : %s/%s", this.getCurrentEnergy(), this.getMaxEnergy())), mouseX, mouseY, this.minecraft.fontRenderer);
 		}
 	}
 	
