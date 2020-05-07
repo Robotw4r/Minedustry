@@ -29,6 +29,7 @@ public class BioFuelGeneratorScreen extends ContainerEnergyScreen<ContainerBioFu
 	public void render(int mouseX, int mouseY, float partialTicks)
 	{
 		int energy = 10;
+		// tile.getUpdateTag()
 		this.updateTooltip(Arrays.asList("Energy : " + energy + "/" + BigDecimal.valueOf(this.getMaxEnergy()).setScale(0).doubleValue()));
 		this.updateEnergy(10);
 		super.render(mouseX, mouseY, partialTicks);

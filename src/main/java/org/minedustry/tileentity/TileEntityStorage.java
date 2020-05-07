@@ -15,10 +15,11 @@ import net.minecraft.tileentity.TileEntityType;
 import net.minecraft.util.INameable;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.StringTextComponent;
+import net.minecraftforge.common.extensions.IForgeTileEntity;
 import net.minecraftforge.items.IItemHandlerModifiable;
 import net.minecraftforge.items.ItemStackHandler;
 
-public abstract class TileEntityStorage extends TileEntity implements IItemHandlerModifiable, INameable, INamedContainerProvider, ISidedInventory
+public abstract class TileEntityStorage extends TileEntity implements IItemHandlerModifiable, INameable, INamedContainerProvider, ISidedInventory, IForgeTileEntity
 {
 	private final ItemStackHandler handler = new ItemStackHandler(this.getSlots())
 	{
