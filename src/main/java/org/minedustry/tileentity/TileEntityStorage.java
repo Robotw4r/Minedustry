@@ -5,23 +5,18 @@ import javax.annotation.Nullable;
 
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
-import net.minecraft.inventory.ISidedInventory;
 import net.minecraft.inventory.container.Container;
-import net.minecraft.inventory.container.INamedContainerProvider;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.tileentity.TileEntityType;
-import net.minecraft.util.INameable;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.StringTextComponent;
-import net.minecraftforge.common.extensions.IForgeTileEntity;
-import net.minecraftforge.items.IItemHandlerModifiable;
 import net.minecraftforge.items.ItemStackHandler;
 
-public abstract class TileEntityStorage extends TileEntity implements IItemHandlerModifiable, INameable, INamedContainerProvider, ISidedInventory, IForgeTileEntity
+public abstract class TileEntityStorage extends TileEntity implements ITileEntityMachine
 {
-	private final ItemStackHandler handler = new ItemStackHandler(this.getSlots())
+	private final ItemStackHandler tileInventory = new ItemStackHandler(this.getSlots())
 	{
 		@Override
 		public int getSlotLimit(int slot)
@@ -47,14 +42,14 @@ public abstract class TileEntityStorage extends TileEntity implements IItemHandl
 	public void read(CompoundNBT compound)
 	{
 		super.read(compound);
-		this.handler.deserializeNBT(compound);
+		this.tileInventory.deserializeNBT(compound);
 		this.name = new StringTextComponent(compound.getString("CustomName"));
 	}
 
 	@Override
 	public CompoundNBT write(CompoundNBT compound)
 	{
-		compound.merge(this.handler.serializeNBT());
+		compound.merge(this.tileInventory.serializeNBT());
 		compound.putString("CustomName", this.getName().getFormattedText());
 		return super.write(compound);
 	}
@@ -62,28 +57,28 @@ public abstract class TileEntityStorage extends TileEntity implements IItemHandl
 	@Override
 	public void setStackInSlot(int slot, @Nonnull ItemStack stack)
 	{
-		this.handler.setStackInSlot(slot, stack);
+		this.tileInventory.setStackInSlot(slot, stack);
 	}
 
 	@Nonnull
 	@Override
 	public ItemStack getStackInSlot(int slot)
 	{
-		return this.handler.getStackInSlot(slot);
+		return this.tileInventory.getStackInSlot(slot);
 	}
 
 	@Nonnull
 	@Override
 	public ItemStack insertItem(int slot, @Nonnull ItemStack stack, boolean simulate)
 	{
-		return this.handler.insertItem(slot, stack, simulate);
+		return this.tileInventory.insertItem(slot, stack, simulate);
 	}
 
 	@Nonnull
 	@Override
 	public ItemStack extractItem(int slot, int amount, boolean simulate)
 	{
-		return this.handler.extractItem(slot, amount, simulate);
+		return this.tileInventory.extractItem(slot, amount, simulate);
 	}
 
 	@Override
