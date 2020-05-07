@@ -26,13 +26,13 @@ public class BioFuelGeneratorScreen extends ContainerEnergyScreen<ContainerBioFu
 	}
 	
 	@Override
-	public void render(int p_render_1_, int p_render_2_, float p_render_3_)
+	public void render(int mouseX, int mouseY, float partialTicks)
 	{
 		int energy = 10;
 		this.updateTooltip(Arrays.asList("Energy : " + energy + "/" + BigDecimal.valueOf(this.getMaxEnergy()).setScale(0).doubleValue()));
 		this.updateEnergy(10);
-		super.render(p_render_1_, p_render_2_, p_render_3_);
-		this.renderHoveredToolTip(p_render_1_, p_render_2_);
+		super.render(mouseX, mouseY, partialTicks);
+		this.renderHoveredToolTip(mouseX, mouseY);
 	}
 
 	@Override
