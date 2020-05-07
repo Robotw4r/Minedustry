@@ -3,12 +3,10 @@ package org.minedustry.registry;
 import org.minedustry.MinedustryMain;
 import org.minedustry.References;
 import org.minedustry.blocks.BiofuelGeneratorBlock;
-import org.minedustry.blocks.BlockBase;
 
 import net.minecraft.block.Block;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber.Bus;
 import net.minecraftforge.registries.IForgeRegistry;

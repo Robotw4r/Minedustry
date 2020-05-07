@@ -40,7 +40,7 @@ public class BioFuelGeneratorScreen extends ContainerEnergyScreen<ContainerBioFu
 	protected void drawGuiContainerBackgroundLayer(float partialTicks, int mouseX, int mouseY)
 	{
 		RenderSystem.color4f(1.0F, 1.0F, 1.0F, 1.0F);
-	    this.minecraft.getTextureManager().bindTexture(new ResourceLocation("textures/gui/container/dispenser.png")); // Test to show a GUI
+	    this.minecraft.getTextureManager().bindTexture(new ResourceLocation("minedustry:textures/gui/container/biofuel_generator.png")); // Test to show a GUI
 	    int x = (this.width - this.xSize) / 2;
 	    int y = (this.height - this.ySize) / 2;
 	    this.blit(x, y, 0, 0, this.xSize, this.ySize);
