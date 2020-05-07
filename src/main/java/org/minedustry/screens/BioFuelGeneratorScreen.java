@@ -1,10 +1,11 @@
 package org.minedustry.screens;
 
-import java.awt.Color;
+import java.math.BigDecimal;
 import java.util.Arrays;
 
 import org.minedustry.container.ContainerBioFuelGenerator;
 import org.minedustry.tileentity.TileEntityStorage;
+import org.minedustry.utilities.BarTexture;
 
 import com.mojang.blaze3d.systems.RenderSystem;
 
@@ -20,14 +21,15 @@ public class BioFuelGeneratorScreen extends ContainerEnergyScreen<ContainerBioFu
 	{
 		super(screen, inv, title);
 		this.setSize(176, 166);
-		this.addEnergyBar(80, 10, 10, 20, 80, false, Color.BLUE.getRGB(), Color.GREEN.getRGB(), null);
+		this.addTexturedEnergyBar(100, 10, 10, 20, 70, false, new BarTexture(new ResourceLocation("textures/block/stone.png"), 0, 0, 10, 2), new BarTexture(new ResourceLocation("textures/block/glowstone.png"), 0, 0, 10, 2), null);
 		this.tile = screen.tile;
 	}
 	
 	@Override
 	public void render(int p_render_1_, int p_render_2_, float p_render_3_)
 	{
-		this.updateTooltip(Arrays.asList("salut", "le", "tooltip"));
+		int energy = 10;
+		this.updateTooltip(Arrays.asList("Energy : " + energy + "/" + BigDecimal.valueOf(this.getMaxEnergy()).setScale(0).doubleValue()));
 		this.updateEnergy(10);
 		super.render(p_render_1_, p_render_2_, p_render_3_);
 		this.renderHoveredToolTip(p_render_1_, p_render_2_);

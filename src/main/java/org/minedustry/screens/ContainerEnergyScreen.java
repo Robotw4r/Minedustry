@@ -123,24 +123,24 @@ public abstract class ContainerEnergyScreen<T extends Container> extends Contain
 		if(isLarge)
 		{
 			this.getMinecraft().getTextureManager().bindTexture(emptyBarTexture.getTexture());
-			this.blit(barX, barY, emptyBarTexture.getX(), emptyBarTexture.getHeight(), barWidth, barHeight);
+			AbstractGui.blit(barX, barY, emptyBarTexture.getX(), emptyBarTexture.getY(), barWidth, barHeight, 16, 16);
 
 			this.getMinecraft().getTextureManager().bindTexture(barTexture.getTexture());
+
+			int width = MathHelper.floor(this.getCurrentEnergy() / this.getMaxEnergy() * this.barWidth);
 			
-			int width = MathHelper.floor(this.getCurrentEnergy() / this.getMaxEnergy() * this.barTexture.getWidth());
-			
-			this.blit(barX, barY, barTexture.getX(), barTexture.getY(), width, barHeight);
+			AbstractGui.blit(barX, barY, barTexture.getX(), barTexture.getY(), width, barHeight, 16, 16);
 		}
 		else
 		{
 			this.getMinecraft().getTextureManager().bindTexture(barTexture.getTexture());
-			this.blit(barX, barY, barTexture.getX(), barTexture.getHeight(), barWidth, height);
+			AbstractGui.blit(barX, barY, barTexture.getX(), barTexture.getY(), barWidth, barHeight, 16, 16);
 
 			this.getMinecraft().getTextureManager().bindTexture(emptyBarTexture.getTexture());
 			
-			int height = this.emptyBarTexture.getHeight() - MathHelper.floor(this.getCurrentEnergy() / this.getMaxEnergy() * this.emptyBarTexture.getHeight());
+			int height = this.barHeight - MathHelper.floor(this.getCurrentEnergy() / this.getMaxEnergy() * this.barHeight);
 			
-			this.blit(barX, barY, emptyBarTexture.getX(), emptyBarTexture.getY(), barWidth, height);
+			AbstractGui.blit(barX, barY, emptyBarTexture.getX(), emptyBarTexture.getY(), barWidth, height, 16, 16);
 		}		
 	}
 
@@ -151,7 +151,9 @@ public abstract class ContainerEnergyScreen<T extends Container> extends Contain
 	
 	public boolean isInRectangle(int mouseX, int mouseY, int x, int y, int width, int height)
 	{
-		return mouseX > barX && mouseX < barX + width && mouseY > barY && mouseY < barY + height;
+		int xx = this.width / 2 - this.xSize / 2;
+		int yy = this.height / 2 - this.ySize / 2;
+		return mouseX > xx + x && mouseX < xx + x + width && mouseY > yy + y && mouseY < yy + y + height;
 	}
 	
 	public double getCurrentEnergy()
