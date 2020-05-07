@@ -43,6 +43,11 @@ public abstract class ContainerEnergyScreen<T extends Container> extends Contain
 		this.tooltip = list;
 	}
 	
+	public void updateTooltip(String tooltip)
+	{
+		this.tooltip = Arrays.asList(tooltip);
+	}
+	
 	public void addEnergyBar(int maxEnergy, int x, int y, int width, int height, boolean isLarge, int color, int backgroundColor, @Nullable List<String> tooltip)
 	{
 		this.barX = x;

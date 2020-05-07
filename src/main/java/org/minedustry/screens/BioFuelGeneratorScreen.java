@@ -1,12 +1,10 @@
 package org.minedustry.screens;
 
-import java.math.BigDecimal;
-import java.util.Arrays;
-
 import org.minedustry.References;
 import org.minedustry.container.ContainerBioFuelGenerator;
 import org.minedustry.tileentity.TileEntityStorage;
 import org.minedustry.utilities.BarTexture;
+import org.minedustry.utilities.NBTs;
 
 import com.mojang.blaze3d.systems.RenderSystem;
 
@@ -18,19 +16,19 @@ public class BioFuelGeneratorScreen extends ContainerEnergyScreen<ContainerBioFu
 {
 	private TileEntityStorage tile;
 
-	public BioFuelGeneratorScreen(ContainerBioFuelGenerator screen, PlayerInventory inv, ITextComponent title)
+	public BioFuelGeneratorScreen(ContainerBioFuelGenerator container, PlayerInventory inv, ITextComponent title)
 	{
-		super(screen, inv, title);
+		super(container, inv, title);
 		this.setSize(176, 166);
 		this.addTexturedEnergyBar(100, 10, 10, 20, 70, false, new BarTexture(References.getLoc("textures/gui/energybar.png"), 0, 0, 10, 2), new BarTexture(References.getLoc("textures/gui/energybarbackground.png"), 0, 0, 10, 2), null);
-		this.tile = screen.tile;
+		this.tile = container.tile;
 	}
 	
 	@Override
 	public void render(int mouseX, int mouseY, float partialTicks)
 	{
-		int energy = 10;
-		this.updateTooltip(Arrays.asList("Energy : " + energy + "/" + BigDecimal.valueOf(this.getMaxEnergy()).setScale(0).doubleValue()));
+		int energy = tile.getTileData().getInt(NBTs.ENERGY);
+		this.updateTooltip("Energy : " + energy + "/" + this.getMaxEnergy());
 		this.updateEnergy(10);
 		super.render(mouseX, mouseY, partialTicks);
 		this.renderHoveredToolTip(mouseX, mouseY);
