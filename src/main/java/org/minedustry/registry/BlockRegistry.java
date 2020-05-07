@@ -16,12 +16,7 @@ import net.minecraftforge.registries.ObjectHolder;
 
 @ObjectHolder(References.MODID)
 @EventBusSubscriber(modid = References.MODID, bus = Bus.MOD)
-public class BlockRegistry
-{
-	public static final Block PLATINUM_BLOCK = new BlockBase("platinum_block");
-    public static final Block COBALT_BLOCK = new BlockBase("cobalt_block");
-    public static final Block THORIUM_BLOCK = new BlockBase("thorium_block");
-    public static final Block BISMUTH_BLOCK = new BlockBase("bismuth_block");
+public class BlockRegistry {
     
     public static final Block BIOFUEL_GENERATOR = new BiofuelGeneratorBlock();
 	
@@ -32,11 +27,9 @@ public class BlockRegistry
 		
 		IForgeRegistry<Block> reg = event.getRegistry();
 		
-		reg.register(PLATINUM_BLOCK);
-		reg.register(COBALT_BLOCK);
-		reg.register(THORIUM_BLOCK);
+		OreRegistery.ORES.forEach(o -> reg.register(o.getBlock()));
+		
 		reg.register(BIOFUEL_GENERATOR);
-		reg.register(BISMUTH_BLOCK);
 		
 		MinedustryMain.LOGGER.debug("Blocks Successfully Registered !");
 	}
