@@ -8,6 +8,7 @@ public class OreRegistery {
 	public static final Ore PLATINUM = new Ore("platinum");
 	public static final Ore COBALT   = new Ore("cobalt");
     public static final Ore THORIUM  = new Ore("thorium");
+	public static final Ore TITANIUM  = new Ore("titanium");
     public static final Ore BISMUTH  = new Ore("bismuth", "chunk");
 	
 	public static final List<Ore> ORES = new ArrayList<>();
@@ -16,6 +17,7 @@ public class OreRegistery {
 		reg(PLATINUM);
 		reg(COBALT);
 		reg(THORIUM);
+		reg(TITANIUM);
 		reg(BISMUTH);
 	}
 	
