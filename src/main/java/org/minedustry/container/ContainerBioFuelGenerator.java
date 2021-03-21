@@ -27,7 +27,7 @@ public class ContainerBioFuelGenerator extends EnergyContainer implements IHasCo
 
 	public ContainerBioFuelGenerator(int id, PlayerInventory playerInv, IIntArray intArray, BlockPos pos)
 	{
-		super(ContainerRegistry.BIOFUEL_GENERATOR, intArray, id, ((TileEntityStorage) playerInv.player.getEntityWorld().getTileEntity(pos)).tileInventory.getSlots());
+		super(ContainerRegistry.BIOFUEL_GENERATOR.get(), intArray, id, ((TileEntityStorage) playerInv.player.getEntityWorld().getTileEntity(pos)).tileInventory.getSlots());
 
 		final TileEntity tile = playerInv.player.getEntityWorld().getTileEntity(pos);
 		this.player = playerInv.player;

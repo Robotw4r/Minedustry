@@ -7,43 +7,55 @@ import org.minedustry.items.ItemBlock;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 
-public class Ore {
-	
+public class Ore
+{
 	private final String name;
+	private String suffix;
 	private final Item item;
 	private final Block block;
 	private final Item itemBlock;
 
-	public Ore(String name) {
+	public Ore(String name)
+	{
 		this.name = name;
-		
+
 		item = new ItemBase(name + "_ingot");
 		block = new BlockBase(name + "_block");
 		itemBlock = new ItemBlock(block);
 	}
-	
-	public Ore(String name, String itemSuffix) {
+
+	public Ore(String name, String itemSuffix)
+	{
 		this.name = name;
-		
+		this.suffix = itemSuffix;
+
 		item = new ItemBase(name + "_" + itemSuffix);
 		block = new BlockBase(name + "_block");
 		itemBlock = new ItemBlock(block);
 	}
-	
-	public String getName() {
+
+	public String getName()
+	{
 		return name;
 	}
-	
-	public Item getItem() {
+
+	public Item getItem()
+	{
 		return item;
 	}
-	
-	public Block getBlock() {
+
+	public Block getBlock()
+	{
 		return block;
 	}
-	
-	public Item getItemBlock() {
+
+	public Item getItemBlock()
+	{
 		return itemBlock;
 	}
 
+	public String getSuffix()
+	{
+		return suffix;
+	}
 }

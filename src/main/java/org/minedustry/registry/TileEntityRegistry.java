@@ -1,35 +1,16 @@
 package org.minedustry.registry;
 
-import org.minedustry.MinedustryMain;
 import org.minedustry.References;
 import org.minedustry.tileentity.TileBioFuelGenerator;
 
 import net.minecraft.tileentity.TileEntityType;
-import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.event.RegistryEvent;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
-import net.minecraftforge.fml.common.Mod.EventBusSubscriber.Bus;
-import net.minecraftforge.registries.ObjectHolder;
+import net.minecraftforge.fml.RegistryObject;
+import net.minecraftforge.registries.DeferredRegister;
+import net.minecraftforge.registries.ForgeRegistries;
 
-@ObjectHolder(References.MODID)
-@EventBusSubscriber(modid = References.MODID, bus = Bus.MOD)
 public class TileEntityRegistry
 {
-	public static final TileEntityType<TileBioFuelGenerator> BIOFUEL_GENERATOR = TileEntityType.Builder.create(TileBioFuelGenerator::new, BlockRegistry.BIOFUEL_GENERATOR).build(null);
-	
-	@SubscribeEvent
-	public static void registerTileEntities(RegistryEvent.Register<TileEntityType<?>> event)
-	{
-		MinedustryMain.LOGGER.debug("Registering Tile Entities...");
-		
-		event.getRegistry().register(BIOFUEL_GENERATOR.setRegistryName(getLoc("bio_fuel_generator")));
+	public static final DeferredRegister<TileEntityType<?>> TILE_ENTITIES = new DeferredRegister<>(ForgeRegistries.TILE_ENTITIES, References.MODID);
 
-		MinedustryMain.LOGGER.debug("Tile Entities Successfully Registered !");
-	}
-	
-	private static ResourceLocation getLoc(String path)
-	{
-		return new ResourceLocation(References.MODID, path);
-	}
+	public static final RegistryObject<TileEntityType<TileBioFuelGenerator>> BIOFUEL_GENERATOR = TILE_ENTITIES.register("biofuel_generator", () -> TileEntityType.Builder.create(TileBioFuelGenerator::new, BlockRegistry.BIOFUEL_GENERATOR.get()).build(null));
 }

@@ -17,11 +17,11 @@ import net.minecraft.util.Direction;
 
 public class TileBioFuelGenerator extends TileEntityEnergyStorage implements ITickableTileEntity
 {
-	private static SlotsFacing SLOTS = new SlotsFacing().setSlots(Direction.EAST, Arrays.asList(0, 1, 2));
-
+	private static final SlotsFacing SLOTS = new SlotsFacing().setSlots(Direction.EAST, Arrays.asList(0, 1, 2));
+		
 	public TileBioFuelGenerator()
 	{
-		super(TileEntityRegistry.BIOFUEL_GENERATOR, SLOTS, 1000, 10, 10, 0);
+		super(TileEntityRegistry.BIOFUEL_GENERATOR.get(), SLOTS, 1000, 10, 10, 0);
 		this.tileInventory.setSize(10);
 	}
 	

@@ -24,7 +24,7 @@ public class Tabs {
 	public static final ItemGroup MACHINES = new ItemGroup("minedustry.machines") {
 		@Override
 		public ItemStack createIcon() {
-			return new ItemStack(ItemRegistry.BIOFUEL_GENERATOR);
+			return new ItemStack(ItemRegistry.BIOFUEL_GENERATOR.get());
 		}
 	};
 }

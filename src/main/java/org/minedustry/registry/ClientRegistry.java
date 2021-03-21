@@ -13,6 +13,6 @@ public class ClientRegistry
 	
 	private void bindScreensWithContainers()
 	{
-    	ScreenManager.registerFactory(ContainerRegistry.BIOFUEL_GENERATOR, BioFuelGeneratorScreen::new);
+    	ScreenManager.registerFactory(ContainerRegistry.BIOFUEL_GENERATOR.get(), BioFuelGeneratorScreen::new);
 	}
 }

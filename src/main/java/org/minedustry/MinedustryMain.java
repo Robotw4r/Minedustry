@@ -5,6 +5,9 @@ import org.apache.logging.log4j.Logger;
 import org.minedustry.packets.NetworkManager;
 import org.minedustry.registry.BlockRegistry;
 import org.minedustry.registry.ClientRegistry;
+import org.minedustry.registry.ContainerRegistry;
+import org.minedustry.registry.ItemRegistry;
+import org.minedustry.registry.TileEntityRegistry;
 
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -23,6 +26,9 @@ public class MinedustryMain
 		IEventBus bus = FMLJavaModLoadingContext.get().getModEventBus();
 		
 		BlockRegistry.BLOCKS.register(bus);
+		ContainerRegistry.CONTAINERS.register(bus);
+		ItemRegistry.ITEMS.register(bus);
+		TileEntityRegistry.TILE_ENTITIES.register(bus);
 		
 		bus.addListener(this::setup);
 		bus.addListener(this::doClientStuff);
