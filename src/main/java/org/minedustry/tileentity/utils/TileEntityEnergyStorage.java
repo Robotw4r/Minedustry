@@ -1,117 +1,162 @@
 package org.minedustry.tileentity.utils;
 
 import org.minedustry.utilities.NBTs;
+import org.minedustry.utilities.SlotsFacing;
 
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.tileentity.TileEntityType;
+import net.minecraft.util.IIntArray;
 import net.minecraftforge.energy.IEnergyStorage;
 
 public abstract class TileEntityEnergyStorage extends TileEntityStorage implements IEnergyStorage
 {
-    protected int energy;
-    protected int capacity;
-    protected int maxReceive;
-    protected int maxExtract;
+	protected int energy;
+	protected int capacity;
+	protected int receiveCapacity;
+	protected int extractCapacity;
 
-    public TileEntityEnergyStorage(TileEntityType<?> type, int capacity, int maxReceive, int maxExtract, int energy)
-    {
-    	super(type);
-        this.capacity = capacity;
-        this.maxReceive = maxReceive;
-        this.maxExtract = maxExtract;
-        this.energy = Math.max(0 , Math.min(capacity, energy));
-    }
+	protected final IIntArray energyStorageData = new IIntArray()
+	{
+		public int get(int index)
+		{
+			switch (index)
+			{
+				case 0:
+					return TileEntityEnergyStorage.this.energy;
+				case 1:
+					return TileEntityEnergyStorage.this.capacity;
+				case 2:
+					return TileEntityEnergyStorage.this.receiveCapacity;
+				case 3:
+					return TileEntityEnergyStorage.this.extractCapacity;
+				default:
+					return 0;
+			}
+		}
 
-    @Override
-    public int receiveEnergy(int maxReceive, boolean simulate)
-    {
-        if (!canReceive())
-            return 0;
+		public void set(int index, int value)
+		{
+			switch (index)
+			{
+				case 0:
+					TileEntityEnergyStorage.this.energy = value;
+					break;
+				case 1:
+					TileEntityEnergyStorage.this.capacity = value;
+					break;
+				case 2:
+					TileEntityEnergyStorage.this.receiveCapacity = value;
+					break;
+				case 3:
+					TileEntityEnergyStorage.this.extractCapacity = value;
+			}
+		}
 
-        int energyReceived = Math.min(capacity - energy, Math.min(this.maxReceive, maxReceive));
-        if (!simulate)
-            energy += energyReceived;
-        return energyReceived;
-    }
+		public int size()
+		{
+			return 4;
+		}
+	};
 
-    @Override
-    public int extractEnergy(int maxExtract, boolean simulate)
-    {
-        if (!canExtract())
-            return 0;
+	public TileEntityEnergyStorage(TileEntityType<?> type, SlotsFacing slots, int capacity, int maxReceive, int maxExtract, int energy)
+	{
+		super(type, slots);
+		this.capacity = capacity;
+		this.receiveCapacity = maxReceive;
+		this.extractCapacity = maxExtract;
+		this.energy = Math.max(0, Math.min(capacity, energy));
+	}
 
-        int energyExtracted = Math.min(energy, Math.min(this.maxExtract, maxExtract));
-        if (!simulate)
-            energy -= energyExtracted;
-        return energyExtracted;
-    }
-    
-    public void setEnergy(int energy)
+	@Override
+	public int receiveEnergy(int maxReceive, boolean simulate)
+	{
+		if (!canReceive())
+			return 0;
+
+		int energyReceived = Math.min(capacity - energy, Math.min(this.receiveCapacity, maxReceive));
+		if (!simulate)
+			energy += energyReceived;
+		return energyReceived;
+	}
+
+	@Override
+	public int extractEnergy(int maxExtract, boolean simulate)
+	{
+		if (!canExtract())
+			return 0;
+
+		int energyExtracted = Math.min(energy, Math.min(this.extractCapacity, maxExtract));
+		if (!simulate)
+			energy -= energyExtracted;
+		return energyExtracted;
+	}
+
+	public void setEnergy(int energy)
 	{
 		this.energy = energy;
 	}
-	
+
 	private void setCapacity(int capacity)
 	{
 		this.capacity = capacity;
 	}
-    
-    private int getMaxExtract()
+
+	private int getMaxExtract()
 	{
-		return maxExtract;
+		return extractCapacity;
 	}
-	
+
 	private int getMaxReceive()
 	{
-		return maxReceive;
+		return receiveCapacity;
 	}
 
-    @Override
-    public int getEnergyStored()
-    {
-        return energy;
-    }
+	@Override
+	public int getEnergyStored()
+	{
+		return energy;
+	}
 
-    @Override
-    public int getMaxEnergyStored()
-    {
-        return capacity;
-    }
+	@Override
+	public int getMaxEnergyStored()
+	{
+		return capacity;
+	}
 
-    @Override
-    public boolean canExtract()
-    {
-        return this.maxExtract > 0;
-    }
+	@Override
+	public boolean canExtract()
+	{
+		return this.extractCapacity > 0;
+	}
 
-    @Override
-    public boolean canReceive()
-    {
-        return this.maxReceive > 0;
-    }
-    
-    @Override
-    public CompoundNBT write(CompoundNBT compound)
-    {
-    	CompoundNBT tag = new CompoundNBT();
-    	
+	@Override
+	public boolean canReceive()
+	{
+		return this.receiveCapacity > 0;
+	}
+
+	@Override
+	public CompoundNBT write(CompoundNBT compound)
+	{
+		CompoundNBT tag = new CompoundNBT();
+
 		super.write(compound);
-		
+
 		tag.putInt(NBTs.ENERGY, getEnergyStored());
 		tag.putInt(NBTs.MAX_ENERGY, getMaxEnergyStored());
 		tag.putInt(NBTs.MAX_EXTRACT, getMaxExtract());
 		tag.putInt(NBTs.MAX_INSERT, getMaxReceive());
 		return tag;
-    }
-    
-    @Override
-    public void read(CompoundNBT compound)
-    {
-    	super.read(compound);
-		
+	}
+
+	@Override
+	public void read(CompoundNBT compound)
+	{
+		super.read(compound);
+
 		setEnergy(compound.getInt(NBTs.ENERGY));
 		setCapacity(compound.getInt(NBTs.MAX_ENERGY));
-		this.maxExtract = compound.getInt(NBTs.MAX_EXTRACT);
-		this.maxReceive = compound.getInt(NBTs.MAX_INSERT);
-    }
+		this.extractCapacity = compound.getInt(NBTs.MAX_EXTRACT);
+		this.receiveCapacity = compound.getInt(NBTs.MAX_INSERT);
+	}
 }

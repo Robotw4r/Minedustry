@@ -3,6 +3,9 @@ package org.minedustry.tileentity.utils;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
+import org.minedustry.utilities.ItemStackUtils;
+import org.minedustry.utilities.SlotsFacing;
+
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.container.Container;
@@ -10,11 +13,12 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.tileentity.TileEntityType;
+import net.minecraft.util.Direction;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.StringTextComponent;
 import net.minecraftforge.items.ItemStackHandler;
 
-public abstract class TileEntityStorage extends TileEntity implements ITileEntityMachine, ITileEntityDataProvider
+public abstract class TileEntityStorage extends TileEntity implements ITileEntityMachine
 {
 	public final ItemStackHandler tileInventory = new ItemStackHandler(this.getSlots())
 	{
@@ -32,10 +36,12 @@ public abstract class TileEntityStorage extends TileEntity implements ITileEntit
 	};
 	
 	private ITextComponent name;
+	private SlotsFacing slots;
 
-	public TileEntityStorage(TileEntityType<?> type)
+	public TileEntityStorage(TileEntityType<?> type, SlotsFacing slots)
 	{
 		super(type);
+		this.slots = slots;
 	}
 
 	@Override
@@ -83,16 +89,7 @@ public abstract class TileEntityStorage extends TileEntity implements ITileEntit
 	}
 
 	@Override
-	public boolean isItemValid(int slot, @Nonnull ItemStack stack)
-	{
-		return true;
-	}
-
-	@Override
-	public abstract int getSlotLimit(int slot);
-
-	@Override
-	public abstract int getSlots();
+	public abstract boolean isItemValid(int slot, @Nonnull ItemStack stack);
 
 	@Nullable
 	@Override
@@ -119,5 +116,87 @@ public abstract class TileEntityStorage extends TileEntity implements ITileEntit
 	public void setCustomName(ITextComponent text)
 	{
 		this.name = text;
+	}
+
+	@Override
+	public int[] getSlotsForFace(Direction side)
+	{
+		return this.slots.getSlots(side).stream().mapToInt(Integer::intValue).toArray();
+	}
+
+	@Override
+	public boolean canInsertItem(int index, ItemStack itemStackIn, Direction direction)
+	{
+		if(getSlotsForFace(direction).length > 0 && this.tileInventory.isItemValid(index, itemStackIn))
+		{
+			return true;
+		}
+		
+		return false;
+	}
+
+	@Override
+	public abstract boolean canExtractItem(int index, ItemStack stack, Direction direction);
+
+	@Override
+	public int getSizeInventory()
+	{
+		return this.tileInventory.getSlots();
+	}
+
+	@Override
+	public boolean isEmpty()
+	{
+		for(int i = 0; i < this.tileInventory.getSlots(); i++)
+		{
+			if(!this.tileInventory.getStackInSlot(i).isEmpty())
+			{
+				return false;
+			}
+		}
+		
+		return true;
+	}
+
+	@Override
+	public ItemStack decrStackSize(int index, int count)
+	{
+		return ItemStackUtils.getAndSplit(tileInventory, index, count);
+	}
+
+	@Override
+	public ItemStack removeStackFromSlot(int index)
+	{
+		return ItemStackUtils.getAndRemove(tileInventory, index);
+	}
+
+	@Override
+	public void setInventorySlotContents(int index, ItemStack stack)
+	{
+		this.tileInventory.setStackInSlot(index, stack);
+	}
+
+	@Override
+	public abstract boolean isUsableByPlayer(PlayerEntity player);
+
+	@Override
+	public void clear()
+	{
+		for(int i = 0; i < this.tileInventory.getSlots(); i++)
+		{
+			this.tileInventory.setStackInSlot(i, ItemStack.EMPTY);
+		}
+	}
+
+	@Override
+	public int getSlotLimit(int slot)
+	{
+		return 64;
+	}
+	
+	@Override
+	public int getSlots()
+	{
+		return this.tileInventory.getSlots();
 	}
 }

@@ -1,7 +1,8 @@
 package org.minedustry.container;
 
-import org.minedustry.container.utils.CommonContainer;
+import org.minedustry.container.utils.EnergyContainer;
 import org.minedustry.registry.ContainerRegistry;
+import org.minedustry.tileentity.TileBioFuelGenerator;
 import org.minedustry.tileentity.utils.TileEntityStorage;
 
 import net.minecraft.client.gui.IHasContainer;
@@ -9,23 +10,31 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.container.Slot;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.IIntArray;
+import net.minecraft.util.IntArray;
 import net.minecraft.util.math.BlockPos;
 import net.minecraftforge.items.SlotItemHandler;
 
-public class ContainerBioFuelGenerator extends CommonContainer implements IHasContainer<ContainerBioFuelGenerator>
+public class ContainerBioFuelGenerator extends EnergyContainer implements IHasContainer<ContainerBioFuelGenerator>
 {
-	public TileEntityStorage tile;
-
-	@SuppressWarnings("resource")
+	public TileBioFuelGenerator tile;
+	public PlayerEntity player;
+	
 	public ContainerBioFuelGenerator(int id, PlayerInventory playerInv, BlockPos pos)
 	{
-		super(ContainerRegistry.BIOFUEL_GENERATOR, id, ((TileEntityStorage) playerInv.player.getEntityWorld().getTileEntity(pos)).tileInventory.getSlots());
-		
-		final TileEntity tile = playerInv.player.getEntityWorld().getTileEntity(pos);
+		this(id, playerInv, new IntArray(4), pos);
+	}
 
-		if(tile instanceof TileEntityStorage)
+	public ContainerBioFuelGenerator(int id, PlayerInventory playerInv, IIntArray intArray, BlockPos pos)
+	{
+		super(ContainerRegistry.BIOFUEL_GENERATOR, intArray, id, ((TileEntityStorage) playerInv.player.getEntityWorld().getTileEntity(pos)).tileInventory.getSlots());
+
+		final TileEntity tile = playerInv.player.getEntityWorld().getTileEntity(pos);
+		this.player = playerInv.player;
+
+		if (tile instanceof TileBioFuelGenerator)
 		{
-			final TileEntityStorage storage = (TileEntityStorage) tile;
+			final TileBioFuelGenerator storage = (TileBioFuelGenerator) tile;
 			this.tile = storage;
 
 			this.addSlot(new SlotItemHandler(storage, 0, 98, 23));
@@ -52,7 +61,7 @@ public class ContainerBioFuelGenerator extends CommonContainer implements IHasCo
 	@Override
 	public boolean canInteractWith(PlayerEntity playerIn)
 	{
-		return true;
+		return this.tile.isUsableByPlayer(playerIn);
 	}
 
 	@Override

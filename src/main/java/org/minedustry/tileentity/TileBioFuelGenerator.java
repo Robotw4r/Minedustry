@@ -1,14 +1,10 @@
 package org.minedustry.tileentity;
 
 import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 import org.minedustry.container.ContainerBioFuelGenerator;
 import org.minedustry.registry.TileEntityRegistry;
 import org.minedustry.tileentity.utils.TileEntityEnergyStorage;
-import org.minedustry.utilities.NBTs;
 import org.minedustry.utilities.SlotsFacing;
 
 import net.minecraft.entity.player.PlayerEntity;
@@ -19,105 +15,35 @@ import net.minecraft.util.Direction;
 
 public class TileBioFuelGenerator extends TileEntityEnergyStorage
 {
-	private SlotsFacing slots = new SlotsFacing().setSlots(Direction.EAST, Arrays.asList(0, 1, 2));
-	
+	private static SlotsFacing SLOTS = new SlotsFacing().setSlots(Direction.EAST, Arrays.asList(0, 1, 2));
+
 	public TileBioFuelGenerator()
 	{
-		super(TileEntityRegistry.BIOFUEL_GENERATOR, 1000, 10, 10, 0);
+		super(TileEntityRegistry.BIOFUEL_GENERATOR, SLOTS, 1000, 10, 10, 0);
 		this.tileInventory.setSize(10);
 	}
 	
 	@Override
-	public int[] getSlotsForFace(Direction side)
+	public Container createMenu(int guiId, PlayerInventory inv, PlayerEntity player)
 	{
-		List<Integer> l = this.slots.getSlots(side);
-		int[] slots = new int[l.size()];
-		for(Integer i : l)
-			slots[i] = l.get(i);
-		
-		return slots;
+		return new ContainerBioFuelGenerator(guiId, inv, this.energyStorageData, this.getPos());
 	}
 
 	@Override
-	public boolean canInsertItem(int index, ItemStack itemStackIn, Direction direction)
+	public boolean isItemValid(int slot, ItemStack stack)
 	{
-		return this.slots.getSlots(direction).contains(index);
+		return true;
 	}
 
 	@Override
 	public boolean canExtractItem(int index, ItemStack stack, Direction direction)
 	{
-		return false;
-	}
-
-	@Override
-	public int getSizeInventory()
-	{
-		return this.tileInventory.getSlots();
-	}
-
-	@Override
-	public boolean isEmpty()
-	{
-		return false;
-	}
-
-	@Override
-	public ItemStack decrStackSize(int index, int count)
-	{
-		return null;
-	}
-
-	@Override
-	public ItemStack removeStackFromSlot(int index)
-	{
-		return null;
-	}
-
-	@Override
-	public void setInventorySlotContents(int index, ItemStack stack)
-	{
-		
+		return true;
 	}
 
 	@Override
 	public boolean isUsableByPlayer(PlayerEntity player)
 	{
-		return false;
+		return true;
 	}
-
-	@Override
-	public void clear()
-	{
-		
-	}
-
-	@Override
-	public int getSlotLimit(int slot)
-	{
-		return 0;
-	}
-
-	@Override
-	public int getSlots()
-	{
-		return 0;
-	}
-
-	@Override
-	public Container createMenu(int guiId, PlayerInventory inv, PlayerEntity player)
-	{
-		return new ContainerBioFuelGenerator(guiId, inv, this.getPos());
-	}
-
-	@Override
-	public Map<String, Integer> getTileEntityData()
-	{
-		Map<String, Integer> map = new HashMap<>();
-		map.put(NBTs.ENERGY, this.energy);
-		map.put(NBTs.MAX_ENERGY, this.capacity);
-		map.put(NBTs.MAX_INSERT, this.maxReceive);
-		map.put(NBTs.MAX_EXTRACT, this.maxExtract);
-		return map;
-	}	
 }

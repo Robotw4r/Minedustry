@@ -44,7 +44,6 @@ public class NetworkManager
 	{		
 		int id = 0;	    
 		
-		network.registerMessage(id++, UpdateTileEntityDataPacket.class, UpdateTileEntityDataPacket::encode, UpdateTileEntityDataPacket::decode, UpdateTileEntityDataPacket.ClientHandler::handle);
 	}
 	
 	private static Optional<NetworkDirection> distClient() { return Optional.of(NetworkDirection.PLAY_TO_CLIENT); }

@@ -4,11 +4,12 @@ import javax.annotation.Nonnull;
 
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
+import net.minecraft.inventory.container.Container;
 import net.minecraft.inventory.container.ContainerType;
 import net.minecraft.inventory.container.Slot;
 import net.minecraft.item.ItemStack;
 
-public class CommonContainer extends ContainerData
+public class CommonContainer extends Container
 {
 	protected final int invenSize;
 
@@ -164,6 +165,8 @@ public class CommonContainer extends ContainerData
 		}
 		return flag;
 	}
+	
+	
 
 	private static boolean areItemStacksEqual(ItemStack stackA, ItemStack stackB)
 	{

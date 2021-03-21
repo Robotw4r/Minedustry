@@ -26,12 +26,12 @@ public class CustomEnergyStorage extends EnergyStorage implements INBTSerializab
 		this.capacity = capacity;
 	}
 	
-	private int getMaxExtract()
+	private int getExtractCapacity()
 	{
 		return maxExtract;
 	}
 	
-	private int getMaxReceive()
+	private int getReceiveCapacity()
 	{
 		return maxReceive;
 	}
@@ -60,8 +60,8 @@ public class CustomEnergyStorage extends EnergyStorage implements INBTSerializab
 		CompoundNBT tag = new CompoundNBT();
 		tag.putInt(NBTs.ENERGY, getEnergyStored());
 		tag.putInt(NBTs.MAX_ENERGY, getMaxEnergyStored());
-		tag.putInt(NBTs.MAX_EXTRACT, getMaxExtract());
-		tag.putInt(NBTs.MAX_INSERT, getMaxReceive());
+		tag.putInt(NBTs.MAX_EXTRACT, getExtractCapacity());
+		tag.putInt(NBTs.MAX_INSERT, getReceiveCapacity());
 		return tag;
 	}
 
