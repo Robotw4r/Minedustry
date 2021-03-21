@@ -1,4 +1,4 @@
-package org.minedustry.tileentity;
+package org.minedustry.tileentity.utils;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -14,9 +14,9 @@ import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.StringTextComponent;
 import net.minecraftforge.items.ItemStackHandler;
 
-public abstract class TileEntityStorage extends TileEntity implements ITileEntityMachine
+public abstract class TileEntityStorage extends TileEntity implements ITileEntityMachine, ITileEntityDataProvider
 {
-	private final ItemStackHandler tileInventory = new ItemStackHandler(this.getSlots())
+	public final ItemStackHandler tileInventory = new ItemStackHandler(this.getSlots())
 	{
 		@Override
 		public int getSlotLimit(int slot)
@@ -49,9 +49,10 @@ public abstract class TileEntityStorage extends TileEntity implements ITileEntit
 	@Override
 	public CompoundNBT write(CompoundNBT compound)
 	{
+		super.write(compound);
 		compound.merge(this.tileInventory.serializeNBT());
 		compound.putString("CustomName", this.getName().getFormattedText());
-		return super.write(compound);
+		return compound;
 	}
 
 	@Override

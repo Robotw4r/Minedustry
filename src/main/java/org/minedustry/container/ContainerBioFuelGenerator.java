@@ -1,23 +1,25 @@
 package org.minedustry.container;
 
+import org.minedustry.container.utils.CommonContainer;
 import org.minedustry.registry.ContainerRegistry;
-import org.minedustry.tileentity.TileEntityStorage;
+import org.minedustry.tileentity.utils.TileEntityStorage;
 
 import net.minecraft.client.gui.IHasContainer;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
-import net.minecraft.inventory.container.Container;
 import net.minecraft.inventory.container.Slot;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.math.BlockPos;
+import net.minecraftforge.items.SlotItemHandler;
 
-public class ContainerBioFuelGenerator extends Container implements IHasContainer<ContainerBioFuelGenerator>
+public class ContainerBioFuelGenerator extends CommonContainer implements IHasContainer<ContainerBioFuelGenerator>
 {
 	public TileEntityStorage tile;
 
+	@SuppressWarnings("resource")
 	public ContainerBioFuelGenerator(int id, PlayerInventory playerInv, BlockPos pos)
 	{
-		super(ContainerRegistry.BIOFUEL_GENERATOR, id);
+		super(ContainerRegistry.BIOFUEL_GENERATOR, id, ((TileEntityStorage) playerInv.player.getEntityWorld().getTileEntity(pos)).tileInventory.getSlots());
 		
 		final TileEntity tile = playerInv.player.getEntityWorld().getTileEntity(pos);
 
@@ -26,7 +28,7 @@ public class ContainerBioFuelGenerator extends Container implements IHasContaine
 			final TileEntityStorage storage = (TileEntityStorage) tile;
 			this.tile = storage;
 
-			// this.addSlot(new SlotItemHandler(storage, 0, 19, 55));
+			this.addSlot(new SlotItemHandler(storage, 0, 98, 23));
 			this.bindPlayerInventory(playerInv, 7, 83);
 		}
 	}
@@ -58,5 +60,4 @@ public class ContainerBioFuelGenerator extends Container implements IHasContaine
 	{
 		return this;
 	}
-
 }

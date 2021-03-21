@@ -35,6 +35,11 @@ public class SlotsFacing
 		
 		return this;
 	}
+	
+	public void resetSlots(Direction facing)
+	{
+		this.setSlots(facing, Collections.emptyList());
+	}
 		
 	public List<Integer> getSlots(Direction facing)
 	{

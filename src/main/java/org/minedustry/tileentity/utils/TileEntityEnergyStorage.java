@@ -1,14 +1,12 @@
-package org.minedustry.utilities.energy;
+package org.minedustry.tileentity.utils;
 
-import org.minedustry.tileentity.TileEntityStorage;
 import org.minedustry.utilities.NBTs;
 
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.tileentity.TileEntityType;
-import net.minecraftforge.common.util.INBTSerializable;
 import net.minecraftforge.energy.IEnergyStorage;
 
-public abstract class TileEntityEnergyStorage extends TileEntityStorage implements IEnergyStorage, INBTSerializable<CompoundNBT>
+public abstract class TileEntityEnergyStorage extends TileEntityStorage implements IEnergyStorage
 {
     protected int energy;
     protected int capacity;
@@ -93,22 +91,27 @@ public abstract class TileEntityEnergyStorage extends TileEntityStorage implemen
     }
     
     @Override
-	public CompoundNBT serializeNBT()
-	{
-		CompoundNBT tag = new CompoundNBT();
+    public CompoundNBT write(CompoundNBT compound)
+    {
+    	CompoundNBT tag = new CompoundNBT();
+    	
+		super.write(compound);
+		
 		tag.putInt(NBTs.ENERGY, getEnergyStored());
 		tag.putInt(NBTs.MAX_ENERGY, getMaxEnergyStored());
 		tag.putInt(NBTs.MAX_EXTRACT, getMaxExtract());
 		tag.putInt(NBTs.MAX_INSERT, getMaxReceive());
 		return tag;
-	}
-
-	@Override
-	public void deserializeNBT(CompoundNBT nbt)
-	{
-		setEnergy(nbt.getInt(NBTs.ENERGY));
-		setCapacity(nbt.getInt(NBTs.MAX_ENERGY));
-		this.maxExtract = nbt.getInt(NBTs.MAX_EXTRACT);
-		this.maxReceive = nbt.getInt(NBTs.MAX_INSERT);		
-	}
+    }
+    
+    @Override
+    public void read(CompoundNBT compound)
+    {
+    	super.read(compound);
+		
+		setEnergy(compound.getInt(NBTs.ENERGY));
+		setCapacity(compound.getInt(NBTs.MAX_ENERGY));
+		this.maxExtract = compound.getInt(NBTs.MAX_EXTRACT);
+		this.maxReceive = compound.getInt(NBTs.MAX_INSERT);
+    }
 }

@@ -1,12 +1,15 @@
 package org.minedustry.tileentity;
 
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.minedustry.container.ContainerBioFuelGenerator;
 import org.minedustry.registry.TileEntityRegistry;
+import org.minedustry.tileentity.utils.TileEntityEnergyStorage;
+import org.minedustry.utilities.NBTs;
 import org.minedustry.utilities.SlotsFacing;
-import org.minedustry.utilities.energy.TileEntityEnergyStorage;
 
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
@@ -21,6 +24,7 @@ public class TileBioFuelGenerator extends TileEntityEnergyStorage
 	public TileBioFuelGenerator()
 	{
 		super(TileEntityRegistry.BIOFUEL_GENERATOR, 1000, 10, 10, 0);
+		this.tileInventory.setSize(10);
 	}
 	
 	@Override
@@ -37,7 +41,7 @@ public class TileBioFuelGenerator extends TileEntityEnergyStorage
 	@Override
 	public boolean canInsertItem(int index, ItemStack itemStackIn, Direction direction)
 	{
-		return false;
+		return this.slots.getSlots(direction).contains(index);
 	}
 
 	@Override
@@ -49,7 +53,7 @@ public class TileBioFuelGenerator extends TileEntityEnergyStorage
 	@Override
 	public int getSizeInventory()
 	{
-		return 0;
+		return this.tileInventory.getSlots();
 	}
 
 	@Override
@@ -104,5 +108,16 @@ public class TileBioFuelGenerator extends TileEntityEnergyStorage
 	public Container createMenu(int guiId, PlayerInventory inv, PlayerEntity player)
 	{
 		return new ContainerBioFuelGenerator(guiId, inv, this.getPos());
+	}
+
+	@Override
+	public Map<String, Integer> getTileEntityData()
+	{
+		Map<String, Integer> map = new HashMap<>();
+		map.put(NBTs.ENERGY, this.energy);
+		map.put(NBTs.MAX_ENERGY, this.capacity);
+		map.put(NBTs.MAX_INSERT, this.maxReceive);
+		map.put(NBTs.MAX_EXTRACT, this.maxExtract);
+		return map;
 	}	
 }
