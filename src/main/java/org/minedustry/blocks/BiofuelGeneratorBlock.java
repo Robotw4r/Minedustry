@@ -64,7 +64,7 @@ public class BiofuelGeneratorBlock extends Block
 	@Override
 	public void onBlockPlacedBy(World world, BlockPos pos, BlockState state, @Nullable LivingEntity entity, ItemStack stack)
 	{
-		if (entity != null)
+		if(entity != null)
 		{
 			world.setBlockState(pos, state.with(BlockStateProperties.HORIZONTAL_FACING, getFacingFromEntity(pos, entity)), 2);
 		}
