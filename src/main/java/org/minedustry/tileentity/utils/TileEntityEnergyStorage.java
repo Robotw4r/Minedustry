@@ -138,15 +138,13 @@ public abstract class TileEntityEnergyStorage extends TileEntityStorage implemen
 	@Override
 	public CompoundNBT write(CompoundNBT compound)
 	{
-		CompoundNBT tag = new CompoundNBT();
-
 		super.write(compound);
 
-		tag.putInt(NBTs.ENERGY, getEnergyStored());
-		tag.putInt(NBTs.MAX_ENERGY, getMaxEnergyStored());
-		tag.putInt(NBTs.MAX_EXTRACT, getMaxExtract());
-		tag.putInt(NBTs.MAX_INSERT, getMaxReceive());
-		return tag;
+		compound.putInt(NBTs.ENERGY, getEnergyStored());
+		compound.putInt(NBTs.MAX_ENERGY, getMaxEnergyStored());
+		compound.putInt(NBTs.MAX_EXTRACT, getMaxExtract());
+		compound.putInt(NBTs.MAX_INSERT, getMaxReceive());
+		return compound;
 	}
 
 	@Override

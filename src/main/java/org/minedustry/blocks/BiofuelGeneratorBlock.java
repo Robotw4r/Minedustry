@@ -42,7 +42,7 @@ public class BiofuelGeneratorBlock extends Block
 			if(worldIn.getTileEntity(pos) instanceof TileBioFuelGenerator)
 			{
 				NetworkHooks.openGui((ServerPlayerEntity) player, (TileBioFuelGenerator) worldIn.getTileEntity(pos), pos);
-				return ActionResultType.SUCCESS;
+				return ActionResultType.CONSUME;
 			}
 		}
 		

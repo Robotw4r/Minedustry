@@ -83,7 +83,7 @@ public abstract class ContainerEnergyScreen<T extends EnergyContainer> extends C
 			if(tooltip != null && !tooltip.isEmpty())
 				this.renderTooltip(tooltip, mouseX, mouseY, this.minecraft.fontRenderer);
 			else
-				this.renderTooltip(Arrays.asList(String.format("Energy :%.0f/%.0f", this.getCurrentEnergy(), this.getCapacity())), mouseX, mouseY, this.minecraft.fontRenderer);
+				this.renderTooltip(Arrays.asList(String.format("Energy : %.0f/%.0f", this.getCurrentEnergy(), this.getCapacity())), mouseX, mouseY, this.minecraft.fontRenderer);
 		}
 	}
 	

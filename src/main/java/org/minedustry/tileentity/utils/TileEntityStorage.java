@@ -48,7 +48,7 @@ public abstract class TileEntityStorage extends TileEntity implements ITileEntit
 	public void read(CompoundNBT compound)
 	{
 		super.read(compound);
-		this.tileInventory.deserializeNBT(compound);
+		this.tileInventory.deserializeNBT(compound.getCompound("Inventory"));
 		this.name = new StringTextComponent(compound.getString("CustomName"));
 	}
 
@@ -56,7 +56,7 @@ public abstract class TileEntityStorage extends TileEntity implements ITileEntit
 	public CompoundNBT write(CompoundNBT compound)
 	{
 		super.write(compound);
-		compound.merge(this.tileInventory.serializeNBT());
+		compound.put("Inventory", this.tileInventory.serializeNBT());
 		compound.putString("CustomName", this.getName().getFormattedText());
 		return compound;
 	}
@@ -197,6 +197,6 @@ public abstract class TileEntityStorage extends TileEntity implements ITileEntit
 	@Override
 	public int getSlots()
 	{
-		return this.tileInventory.getSlots();
+		return 10;
 	}
 }
