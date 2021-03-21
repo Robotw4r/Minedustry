@@ -46,7 +46,7 @@ public class BiofuelGeneratorBlock extends Block
 			}
 		}
 		
-		return ActionResultType.FAIL;
+		return ActionResultType.CONSUME;
 	}
 	
 	@Override
