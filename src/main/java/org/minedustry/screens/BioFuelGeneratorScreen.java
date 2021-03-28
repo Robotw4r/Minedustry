@@ -22,14 +22,15 @@ public class BioFuelGeneratorScreen extends MachineEnergySpecialContainerScreen<
 	{
 		super(container, inv, title);
 		this.setSize(176, 166);
-		this.addBar(energyBar = new TexturedBar(this, 150, 6, 20, 38, false, Color.RED, null));
-		this.addBar(storageBar = new TexturedBar(this, 10, 7, 20, 60, false, Color.GREEN, null));
+		this.addBar(energyBar = new TexturedBar(this,10, 7, 20, 60, false, Color.YELLOW, null));
+		this.addBar(storageBar = new TexturedBar(this,108 , 17, 20, 38, false, Color.GREEN, null));
 	}
 
 	@Override
 	public void render(int mouseX, int mouseY, float partialTicks)
 	{
 		energyBar.updateValue(this.getContainer().getEnergy(), this.getContainer().getEnergyCapacity());
+		energyBar.updateTooltip(References.getTranslate("screen.bar.energy", this.getContainer().getEnergy(), this.getContainer().getEnergyCapacity()));
 		storageBar.updateValue(this.getContainer().getStoredMaterialValue(), this.getContainer().getMaterialStorageCapacity());
 		storageBar.updateTooltip(References.getTranslate("screen.bar.bio_fuel", this.getContainer().getStoredMaterialValue(), this.getContainer().getMaterialStorageCapacity()));
 		
