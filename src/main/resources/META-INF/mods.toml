@@ -21,9 +21,7 @@ credits="Thanks for this example mod goes to Java" #optional
 
 authors="Robotwar_, Swizz, Eno_gamer10" #optional
 
-description='''
-A mod about automating Minecraft in newer versions of Minecraft
-'''
+description="A mod about automating Minecraft in newer versions of Minecraft"
 
 [[dependencies.examplemod]] #optional
     # the modid of the dependency
