@@ -15,11 +15,11 @@ public class EnergyContainer extends CommonContainer
 	 */
 	private IIntArray energyStorageData;
 
-	public EnergyContainer(ContainerType<?> type, IIntArray array, int id, int size)
+	public EnergyContainer(ContainerType<?> type, IIntArray energyStorageData, int id, int size)
 	{
 		super(type, id, size);
-		this.energyStorageData = array;
-		this.trackIntArray(array);
+		this.energyStorageData = energyStorageData;
+		this.trackIntArray(energyStorageData);
 	}
 	
 	@OnlyIn(Dist.CLIENT)
@@ -29,7 +29,7 @@ public class EnergyContainer extends CommonContainer
 	}
 	
 	@OnlyIn(Dist.CLIENT)
-	public int getCapacity()
+	public int getEnergyCapacity()
 	{
 		return this.energyStorageData.get(1);
 	}

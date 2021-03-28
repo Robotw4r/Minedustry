@@ -14,7 +14,7 @@ public abstract class TileEntityEnergyStorage extends TileEntityStorage implemen
 	protected int capacity;
 	protected int receiveCapacity;
 	protected int extractCapacity;
-
+	
 	protected final IIntArray energyStorageData = new IIntArray()
 	{
 		public int get(int index)
@@ -58,13 +58,13 @@ public abstract class TileEntityEnergyStorage extends TileEntityStorage implemen
 		}
 	};
 
-	public TileEntityEnergyStorage(TileEntityType<?> type, SlotsFacing slots, int capacity, int maxReceive, int maxExtract, int energy)
+	public TileEntityEnergyStorage(TileEntityType<?> type, SlotsFacing slots, int capacity, int maxReceive, int maxExtract)
 	{
 		super(type, slots);
 		this.capacity = capacity;
 		this.receiveCapacity = maxReceive;
 		this.extractCapacity = maxExtract;
-		this.energy = Math.max(0, Math.min(capacity, energy));
+		this.energy = 0;
 	}
 
 	@Override
@@ -89,6 +89,13 @@ public abstract class TileEntityEnergyStorage extends TileEntityStorage implemen
 		if (!simulate)
 			energy -= energyExtracted;
 		return energyExtracted;
+	}
+	
+	public abstract int requiredEnergy();
+	
+	public boolean hasEnoughEnergy()
+	{
+		return this.energy >= this.requiredEnergy();
 	}
 
 	public void setEnergy(int energy)

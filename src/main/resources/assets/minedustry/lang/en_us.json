@@ -15,5 +15,9 @@
   
   "itemGroup.minedustry.items": "Minedustry Items",
   "itemGroup.minedustry.blocks": "Minedustry Blocks",
-  "itemGroup.minedustry.machines": "Minedustry Machines"
+  "itemGroup.minedustry.machines": "Minedustry Machines",
+  
+  "minedustry.screen.bar.energy": "Energy : %d/%d",
+  "minedustry.screen.bar.bio_fuel": "Bio Fuel : %d/%d",
+  "minedustry.screen.bar.default": "%d/%d"
 }

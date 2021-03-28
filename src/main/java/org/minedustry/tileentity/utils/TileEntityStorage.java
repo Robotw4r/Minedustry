@@ -197,6 +197,8 @@ public abstract class TileEntityStorage extends TileEntity implements ITileEntit
 	@Override
 	public int getSlots()
 	{
-		return 10;
+		return this.getInventorySize();
 	}
+	
+	public abstract int getInventorySize();
 }

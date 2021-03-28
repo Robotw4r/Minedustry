@@ -3,6 +3,7 @@ package org.minedustry.blocks;
 import javax.annotation.Nullable;
 
 import org.minedustry.tileentity.TileBioFuelGenerator;
+import org.minedustry.utilities.InventoryUtils;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
@@ -26,12 +27,12 @@ import net.minecraftforge.common.ToolType;
 import net.minecraftforge.fml.network.NetworkHooks;
 
 public class BiofuelGeneratorBlock extends Block
-{	
+{
 	public BiofuelGeneratorBlock()
 	{
 		super(Properties.create(Material.IRON).sound(SoundType.METAL).hardnessAndResistance(2.0f).lightValue(14).harvestTool(ToolType.PICKAXE));
 	}
-	
+
 	@Override
 	public ActionResultType onBlockActivated(BlockState state, World worldIn, BlockPos pos, PlayerEntity player, Hand handIn, BlockRayTraceResult hit)
 	{
@@ -43,22 +44,39 @@ public class BiofuelGeneratorBlock extends Block
 				return ActionResultType.CONSUME;
 			}
 		}
-		
+
 		return ActionResultType.CONSUME;
 	}
-	
+
+	@SuppressWarnings("deprecation")
+	@Override
+	public void onReplaced(BlockState state, World worldIn, BlockPos pos, BlockState newState, boolean isMoving)
+	{
+		if(state.getBlock() != newState.getBlock())
+		{
+			if(worldIn.getTileEntity(pos) instanceof TileBioFuelGenerator)
+			{
+				TileBioFuelGenerator tile = (TileBioFuelGenerator) worldIn.getTileEntity(pos);
+				InventoryUtils.dropInventoryItems(worldIn, pos, tile.tileInventory);
+				worldIn.updateComparatorOutputLevel(pos, this);
+			}
+
+			super.onReplaced(state, worldIn, pos, newState, isMoving);
+		}
+	}
+
 	@Override
 	public TileEntity createTileEntity(BlockState state, IBlockReader world)
 	{
 		return new TileBioFuelGenerator();
 	}
-	
+
 	@Override
 	public boolean hasTileEntity(BlockState state)
 	{
 		return true;
 	}
-	
+
 	@Override
 	public void onBlockPlacedBy(World world, BlockPos pos, BlockState state, @Nullable LivingEntity entity, ItemStack stack)
 	{

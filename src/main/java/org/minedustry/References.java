@@ -1,6 +1,7 @@
 package org.minedustry;
 
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.text.TranslationTextComponent;
 
 public class References
 {
@@ -11,5 +12,21 @@ public class References
 	public static ResourceLocation getLoc(String path)
 	{
 		return new ResourceLocation(MODID, path);
+	}
+	
+	public static String getTranslate(String path)
+	{
+		return new TranslationTextComponent(path).getFormattedText();
+	}
+	
+	/**
+	 * 
+	 * @param path
+	 * @param args
+	 * @return translated path with prefix 'minedustry.'
+	 */
+	public static String getTranslate(String path, Object... args)
+	{
+		return new TranslationTextComponent(MODID + "." + path, args).getFormattedText();
 	}
 }

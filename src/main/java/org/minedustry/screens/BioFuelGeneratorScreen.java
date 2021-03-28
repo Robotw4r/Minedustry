@@ -1,8 +1,12 @@
 package org.minedustry.screens;
 
+import java.awt.Color;
+
 import org.minedustry.References;
 import org.minedustry.container.ContainerBioFuelGenerator;
-import org.minedustry.utilities.BarTexture;
+import org.minedustry.screens.utils.MachineEnergySpecialContainerScreen;
+import org.minedustry.utilities.Bar;
+import org.minedustry.utilities.TexturedBar;
 
 import com.mojang.blaze3d.systems.RenderSystem;
 
@@ -10,19 +14,27 @@ import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.ITextComponent;
 
-public class BioFuelGeneratorScreen extends ContainerEnergyScreen<ContainerBioFuelGenerator>
+public class BioFuelGeneratorScreen extends MachineEnergySpecialContainerScreen<ContainerBioFuelGenerator>
 {
+	private Bar energyBar, storageBar;
+	
 	public BioFuelGeneratorScreen(ContainerBioFuelGenerator container, PlayerInventory inv, ITextComponent title)
 	{
-		super(container, container.tile, inv, title);
+		super(container, inv, title);
 		this.setSize(176, 166);
-		this.addTexturedEnergyBar(100, 10, 7, 20, 60, false, new BarTexture(References.getLoc("textures/gui/energybar.png"), 0, 0, 10, 2), new BarTexture(References.getLoc("textures/gui/energybarbackground.png"), 0, 0, 10, 2), null);
+		this.addBar(energyBar = new TexturedBar(this, 150, 6, 20, 38, false, Color.RED, null));
+		this.addBar(storageBar = new TexturedBar(this, 10, 7, 20, 60, false, Color.GREEN, null));
 	}
 
 	@Override
 	public void render(int mouseX, int mouseY, float partialTicks)
 	{
+		energyBar.updateValue(this.getContainer().getEnergy(), this.getContainer().getEnergyCapacity());
+		storageBar.updateValue(this.getContainer().getStoredMaterialValue(), this.getContainer().getMaterialStorageCapacity());
+		storageBar.updateTooltip(References.getTranslate("screen.bar.bio_fuel", this.getContainer().getStoredMaterialValue(), this.getContainer().getMaterialStorageCapacity()));
+		
 		super.render(mouseX, mouseY, partialTicks);
+		
 		this.renderHoveredToolTip(mouseX, mouseY);
 	}
 
