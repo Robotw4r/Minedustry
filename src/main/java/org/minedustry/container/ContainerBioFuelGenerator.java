@@ -34,7 +34,7 @@ public class ContainerBioFuelGenerator extends EnergyMachineSpecialContainer imp
 			final TileBioFuelGenerator storage = (TileBioFuelGenerator) tile;
 			this.tile = storage;
 
-			this.addSlot(new SlotItemHandler(storage, 0, 98, 23));
+			this.addSlot(new SlotItemHandler(storage, 0, 64, 29));
 			this.bindPlayerInventory(playerInv, 7, 83);
 		}
 	}
