@@ -3,8 +3,10 @@
   "item.minedustry.cobalt_ingot": "Cobalt Ingot",
   "item.minedustry.thorium_ingot": "Thorium Ingot",
   "item.minedustry.titanium_ingot": "Titanium Ingot",
-  "item.minedustry.bismuth_chunk": "Bismuth Chunk",
-  
+  "item.minedustry.bismuth_shard1": "Impure Bismuth",
+  "item.minedustry.bismuth_shard2": "Pure Bismuth",
+  "item.minedustry.bismuth_shard3": "Perfect Bismuth",
+
   "block.minedustry.platinum_block": "Platinum Block",
   "block.minedustry.cobalt_block": "Cobalt Block",
   "block.minedustry.thorium_block": "Thorium Block",
@@ -12,6 +14,8 @@
   "block.minedustry.bismuth_block": "Bismuth Block",
   
   "block.minedustry.biofuel_generator": "Biofuel Generator",
+
+  "item.minedustry.chainsaw": "Chainsaw",
   
   "itemGroup.minedustry.items": "Minedustry Items",
   "itemGroup.minedustry.blocks": "Minedustry Blocks",
@@ -20,4 +24,5 @@
   "minedustry.screen.bar.energy": "Energy : %d/%d",
   "minedustry.screen.bar.bio_fuel": "Bio Fuel : %d/%d",
   "minedustry.screen.bar.default": "%d/%d"
+
 }

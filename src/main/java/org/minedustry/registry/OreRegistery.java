@@ -18,8 +18,10 @@ public class OreRegistery
 	public static final Ore PLATINUM = new Ore("platinum");
 	public static final Ore COBALT = new Ore("cobalt");
 	public static final Ore THORIUM = new Ore("thorium");
+
+
+
 	public static final Ore TITANIUM = new Ore("titanium");
-	public static final Ore BISMUTH = new Ore("bismuth", "chunk");
 
 	public static final List<Ore> ORES = new ArrayList<>();
 
@@ -29,7 +31,6 @@ public class OreRegistery
 		register(COBALT);
 		register(THORIUM);
 		register(TITANIUM);
-		register(BISMUTH);
 	}
 
 	public static void register(Ore ore)
