@@ -1,6 +1,8 @@
 package org.minedustry.registry;
 
 import org.minedustry.References;
+import org.minedustry.blocks.BiofuelGeneratorBlock;
+import org.minedustry.items.ChainsawItem;
 import org.minedustry.items.ItemBase;
 import org.minedustry.items.ItemBlock;
 import org.minedustry.utilities.Tabs;
@@ -22,5 +24,5 @@ public class ItemRegistry
 
 	public static final RegistryObject<Item> BISMUTH_BLOCK = ITEMS.register("bismuth_block", () -> new ItemBlock(BlockRegistry.BISMUTH_BLOCK.get(), Tabs.BLOCKS));
 
-	public static final RegistryObject<Item> CHAINSAW = ITEMS.register("chainsaw", () -> new Item(new Item.Properties().group(Tabs.ITEMS)));
+	public static final RegistryObject<Item> CHAINSAW = ITEMS.register("chainsaw", () -> new ChainsawItem());
 }
